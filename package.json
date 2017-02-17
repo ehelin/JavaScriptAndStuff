@@ -1,0 +1,24 @@
+{
+  "name": "javascriptpatternsandstuff",
+  "version": "1.0.0",
+  "description": "This project demonstrates design patterns, code and other concepts",
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "mocha"
+  },
+  "author": "Eric Helin",
+  "license": "ISC",
+  "dependencies": {
+    "@types/chai": "^3.4.34",
+    "@types/express": "^4.0.35",
+    "@types/mocha": "^2.2.39",
+    "@types/sinon": "^1.16.35",
+    "@types/sinon-chai": "^2.7.27",
+    "chai": "^3.5.0",
+    "express": "^4.14.1",
+    "mocha": "^3.2.0",
+    "sinon": "^1.17.7",
+    "sinon-chai": "^2.8.0"
+  }
+}

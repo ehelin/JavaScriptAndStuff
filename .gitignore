@@ -1,0 +1,8 @@
+node_modules
+npm-debug.log
+.idea/inspectionProfiles/
+.idea/javascriptpatternsandstuff.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+node_modules/
