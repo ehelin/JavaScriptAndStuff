@@ -7,8 +7,10 @@ app.get('/', function (req, res) {
 
 //register routes
 var javascriptLanguageMechanicRoutes = require('./javascript/languageMechanics/routes');
+var javascriptPatternRoutes = require('./javascript/patterns/routes');
 
 app.use(javascriptLanguageMechanicRoutes);
+app.use(javascriptPatternRoutes);
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000!')
