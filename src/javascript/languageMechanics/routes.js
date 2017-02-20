@@ -18,12 +18,12 @@ app.get('/javascript/languagemechanics/objectfunctions', function (req, res)
     var objectFunctions = new module.objectFunctions();
 
     objectFunctions.getPrototypeOf();
-    objectFunctions.getOwnPropertyNames();
-    objectFunctions.assign();
-    objectFunctions.every();
-    objectFunctions.dotDotDotOperator();
-    objectFunctions.displayWithALambda();
-    objectFunctions.keysDemo();
+    // objectFunctions.getOwnPropertyNames();
+    // objectFunctions.assign();
+    // objectFunctions.every();
+    // objectFunctions.dotDotDotOperator();
+    // objectFunctions.displayWithALambda();
+    // objectFunctions.keysDemo();
 
     res.send('/javascript/languagemechanics/objectfunctions - complete!');
 });

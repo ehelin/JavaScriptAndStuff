@@ -1,12 +1,13 @@
 function objectFunctions () {
 
     this.getPrototypeOf = function () {
-        var utilities = require('./utilities');
-        var myComplexObjectArray = utilities.setUpObjectCollection();
+        var importer = require('./AnObject');
 
-        //TODO - shouldn't this return a prototype list?  returns {}
+        var anObject = new importer.AnObject();
+        var anotherObject = Object.create(anObject);
+
         console.log('Object.getPrototypeOf() -----------------');
-        console.log(Object.getPrototypeOf(myComplexObjectArray[0]));
+        console.log(Object.getPrototypeOf(anotherObject));
         console.log('');
     };
     this.getOwnPropertyNames = function () {
