@@ -20,8 +20,8 @@ app.get('/javascript/languagemechanics/objectfunctions', function (req, res)
     //objectFunctions.getPrototypeOf();
     //objectFunctions.getOwnPropertyNames();
     //objectFunctions.assign();
-    objectFunctions.every();
-    // objectFunctions.dotDotDotOperator();
+    //objectFunctions.every();
+    objectFunctions.dotDotDotOperator();
     // objectFunctions.displayWithALambda();
     // objectFunctions.keysDemo();
 

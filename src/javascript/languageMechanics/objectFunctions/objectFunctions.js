@@ -55,7 +55,8 @@ function objectFunctions () {
     };
     this.dotDotDotOperator = function () {
         var utilities = require('./utilities');
-        let employeeName = utilities.buildName('Joseph', 'Samuel', 'Lucas', 'MacKinzie', 'Smith', 'Gertrude', 'Ethel');
+        let employeeName = utilities.buildName('Joseph', 'Samuel', 'Lucas', 'MacKinzie',
+                                                'Smith', 'Gertrude', 'Ethel');
 
         console.log('... Operator-------------------------------');
         console.log(employeeName);

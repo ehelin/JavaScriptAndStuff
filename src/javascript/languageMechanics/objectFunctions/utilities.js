@@ -7,7 +7,6 @@ function aComplexObjectArrayItem (propertyOneValue,
     this.propertyThree = propertyThreeValue;
     this.propertyFour = propertyFourValue;
 }
-
 function setUpObjectCollection() {
     let complexObjectArr = [];
 
@@ -24,7 +23,6 @@ function setUpObjectCollection() {
 
     return complexObjectArr;
 };
-
 function myEveryFunctionFive(aComplexObjectArrayItem) {
     return aComplexObjectArrayItem.propertyOne >= 5;
 }
