@@ -13,9 +13,9 @@ function setUpObjectCollection() {
     let ctr = 0;
     while(ctr < 10){
         var myObject = new aComplexObjectArrayItem(ctr,
-                                                 'propertyTwo ' + ctr.toString(),
-                                                 'propertyThree ' + ctr.toString(),
-                                                 'propertyFour ' + ctr.toString());
+                             'propertyTwo ' + ctr.toString(),
+                             'propertyThree ' + ctr.toString(),
+                             'propertyFour ' + ctr.toString());
         complexObjectArr.push(myObject);
 
         ctr++;
@@ -29,7 +29,6 @@ function myEveryFunctionFive(aComplexObjectArrayItem) {
 function myEveryFunctionNegativeOne(aComplexObjectArrayItem) {
     return aComplexObjectArrayItem.propertyOne >= -1;
 }
-
 function buildName(firstName, ...restOfName) {
     return firstName + " " + restOfName.join(" ");
 }
