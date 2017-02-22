@@ -22,8 +22,8 @@ app.get('/javascript/languagemechanics/objectfunctions', function (req, res)
     //objectFunctions.assign();
     //objectFunctions.every();
     //objectFunctions.dotDotDotOperator();
-    objectFunctions.displayWithALambda();
-    // objectFunctions.keysDemo();
+    //objectFunctions.displayWithALambda();
+    objectFunctions.keysDemo();
 
     res.send('/javascript/languagemechanics/objectfunctions - complete!');
 });

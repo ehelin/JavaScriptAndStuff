@@ -76,12 +76,11 @@ function objectFunctions () {
         for(var i=0; i<arr.length; i++){
             let keysOutput = 'keys(' + i + '): ' + keys[i];
             let arrOutput = 'arr(' + i + '): ' + arr[i];
-            let arrViaOutputKeys = 'arr[key] - arr[' + i + ']: ' + arr[keys[i]];
 
+            console.log('');
             console.log('objectKeysDemo ------------------')
             console.log(keysOutput)
             console.log(arrOutput);
-            console.log(arrViaOutputKeys);
         }
     }
 };
