@@ -19,12 +19,18 @@ function Destructuring () {
     };
 
     this.nestedDestructuring = function() {
-        const  {  anotherRootProperty: propertyOne,multiLevelNestedProperty:
-            {nestLevelOneNest: {nestLevelTwoNest: {nestLevelThreeNest: { nestLevelFourNest: {
-                nestLevelFiveNest: {nestLevelSixNest: {nestLevelSixProperty: propertyTwo,
-                    nestLevelSevenNest: {nestLevelEightNest:
-                        {nestLevelEightProperty: propertyThree,},
-                    },},},},},},},}} = aComplexObject.aReallyComplicatedObject;
+        const  {  anotherRootProperty: propertyOne,
+                  multiLevelNestedProperty:
+                    {nestLevelOneNest:
+                        {nestLevelTwoNest:
+                            {nestLevelThreeNest:
+                                { nestLevelFourNest:
+                                    {nestLevelFiveNest:
+                                        {nestLevelSixNest:
+                                            {nestLevelSixProperty: propertyTwo,
+                                             nestLevelSevenNest: {nestLevelEightNest:
+                                                    {nestLevelEightProperty: propertyThree,
+                                                    },},},},},},},},}} = aComplexObject.aReallyComplicatedObject;
 
         console.log('Nested Destructing ----------');
         console.log(propertyOne);
