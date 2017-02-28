@@ -17,13 +17,14 @@ app.get('/javascript/languagemechanics/objectfunctions', function (req, res)
     var module = require('./objectFunctions/objectFunctions');
     var objectFunctions = new module.objectFunctions();
 
-    objectFunctions.getPrototypeOf();
-    objectFunctions.getOwnPropertyNames();
-    objectFunctions.assign();
-    objectFunctions.every();
-    objectFunctions.dotDotDotOperator();
-    objectFunctions.displayWithALambda();
-    objectFunctions.keysDemo();
+    // objectFunctions.getPrototypeOf();
+    // objectFunctions.getOwnPropertyNames();
+    // objectFunctions.assign();
+    // objectFunctions.every();
+    // objectFunctions.dotDotDotOperator();
+    // objectFunctions.displayWithALambda();
+    // objectFunctions.keysDemo();
+    objectFunctions.objectAsArrayFacade();
 
     res.send('/javascript/languagemechanics/objectfunctions - complete!');
 });

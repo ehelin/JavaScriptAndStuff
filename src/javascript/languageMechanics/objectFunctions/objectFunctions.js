@@ -83,6 +83,21 @@ function objectFunctions () {
             console.log(arrOutput);
         }
     }
+    this.objectAsArrayFacade = function() {
+        const myObject = {
+            property: 'value'
+        };
+
+        myObject[1] = 'value1';
+        myObject[2] = 'value2';
+        myObject[3] = 'value3';
+
+        console.log('');
+        console.log('object as array facade (ish) ------------------')
+        console.log(myObject);
+        console.log('');
+        Object.keys(myObject).forEach((key) => console.log(myObject[key]));
+    }
 };
 
 module.exports.objectFunctions = objectFunctions;
