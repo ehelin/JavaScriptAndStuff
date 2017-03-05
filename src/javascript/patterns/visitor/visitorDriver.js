@@ -5,19 +5,19 @@ var visitorInterface = require('./IVisit');
 function demoVisitorPattern() {
     console.log('inside demoVisitorPattern()');
 
-    var systemsGroupOne = buildSystems(5, 'SystemGroupOne');
-    var systemsGroupTwo = buildSystems(50, 'SystemGroupTwo');
-    var systemsGroupThree = buildSystems(50000, 'SystemGroupThree');
-    var systemsGroupFour = buildSystems(500, 'SystemGroupFour');
-    var systemsGroupFive = buildSystems(50000, 'SystemGroupFive');
-
-    var systemVisitor = visitor.SystemVisitor;
-
-    evaluateSystem(systemsGroupOne, visitor);
-    evaluateSystem(systemsGroupTwo, visitor);
-    evaluateSystem(systemsGroupThree, visitor);
-    evaluateSystem(systemsGroupFour, visitor);
-    evaluateSystem(systemsGroupFive, visitor);
+    var systemsGroupOne = buildSystems(1, 'SystemGroupOne');
+    // var systemsGroupTwo = buildSystems(50, 'SystemGroupTwo');
+    // var systemsGroupThree = buildSystems(50000, 'SystemGroupThree');
+    // var systemsGroupFour = buildSystems(500, 'SystemGroupFour');
+    // var systemsGroupFive = buildSystems(50000, 'SystemGroupFive');
+    //
+    // var systemVisitor = visitor.SystemVisitor;
+    //
+    // evaluateSystem(systemsGroupOne, visitor);
+    // evaluateSystem(systemsGroupTwo, visitor);
+    // evaluateSystem(systemsGroupThree, visitor);
+    // evaluateSystem(systemsGroupFour, visitor);
+    // evaluateSystem(systemsGroupFive, visitor);
 
 };
 
@@ -45,7 +45,6 @@ function buildsSystem(id, groupName){
 
     system.name = 'System' + id;
     system.group = groupName;
-    //system.visitor = undefined;
     system.acceptVisitor = function(visitor){
         visitor.SystemVisitor.visit(this);
     };

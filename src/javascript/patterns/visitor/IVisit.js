@@ -1,5 +1,5 @@
 var IVisit = {
-    visit: function(name, group) {}
+    visit: function(system) {}
 };
 
 module.exports.IVisit = IVisit;
