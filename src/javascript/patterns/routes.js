@@ -21,3 +21,10 @@ app.get('/javascript/patterns/observer', function(req, res){
 
     res.send('/javascript/patterns/observer - complete!');
 });
+
+app.get('/javascript/patterns/serviceLocator', function(req, res){
+    var cmd = require('./dependancyLocator/dependancyLocatorDriver');
+    cmd.demoServiceLocatorPattern();
+
+    res.send('/javascript/patterns/serviceLocator - complete!');
+});
