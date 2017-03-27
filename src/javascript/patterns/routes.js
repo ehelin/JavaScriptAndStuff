@@ -7,24 +7,27 @@ app.get('/javascript/patterns/command', function(req, res){
 
     res.send('/javascript/patterns/command - complete!');
 });
-
 app.get('/javascript/patterns/visitor', function(req, res){
     var cmd = require('./visitor/visitorDriver');
     cmd.demoVisitorPattern();
 
     res.send('/javascript/patterns/visitor - complete!');
 });
-
 app.get('/javascript/patterns/observer', function(req, res){
     var cmd = require('./observer/observerDriver');
     cmd.demoObserverPattern();
 
     res.send('/javascript/patterns/observer - complete!');
 });
-
 app.get('/javascript/patterns/serviceLocator', function(req, res){
     var cmd = require('./dependancyLocator/dependancyLocatorDriver');
     cmd.demoServiceLocatorPattern();
 
     res.send('/javascript/patterns/serviceLocator - complete!');
+});
+app.get('/javascript/patterns/binarySearchTree', function(req, res){
+    var cmd = require('./binarySearchTree/binarySearchTreeDriver');
+    cmd.demoBinarySearchTree();
+
+    res.send('/javascript/patterns/binarySearchTree - complete!');
 });
