@@ -11,7 +11,14 @@ app.get('/javascript/languagemechanics/destructuring', function (req, res)
 
     res.send('/javascript/languagemechanics/destructuring - complete!');
 });
+app.get('/javascript/languagemechanics/objectcreation', function(req, res)
+{
+    var reference = require('./objectCreation/objectCreationDriver');
 
+    reference.demoObjectCreation();
+
+    res.send('/javascript/languagemechanics/objectcreation - complete!');
+});
 app.get('/javascript/languagemechanics/objectfunctions', function (req, res)
 {
     var module = require('./objectFunctions/objectFunctions');
