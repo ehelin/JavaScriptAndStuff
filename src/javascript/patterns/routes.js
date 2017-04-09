@@ -25,6 +25,15 @@ app.get('/javascript/patterns/serviceLocator', function(req, res){
 
     res.send('/javascript/patterns/serviceLocator - complete!');
 });
+app.get('/javascript/patterns/singleton', function(req, res){
+    var cmd = require('./singleton/singletonDriver');
+    cmd.demoSingletonPattern();
+
+    res.send('/javascript/patterns/singleton - complete!');
+});
+
+
+// TODO - complete
 app.get('/javascript/patterns/binarySearchTree', function(req, res){
     var cmd = require('./binarySearchTree/binarySearchTreeDriver');
     cmd.demoBinarySearchTree();
