@@ -31,7 +31,12 @@ app.get('/javascript/patterns/singleton', function(req, res){
 
     res.send('/javascript/patterns/singleton - complete!');
 });
+app.get('/javascript/patterns/chainOfResponsibility', function(req, res){
+    var cmd = require('./chainOfResponsibility/chainOfResponsibilityDriver');
+    cmd.demoChainOfResponsibility();
 
+    res.send('/javascript/patterns/chainOfResponsibility - complete!');
+});
 
 // TODO - complete
 app.get('/javascript/patterns/binarySearchTree', function(req, res){
