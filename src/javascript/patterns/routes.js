@@ -37,6 +37,12 @@ app.get('/javascript/patterns/chainOfResponsibility', function(req, res){
 
     res.send('/javascript/patterns/chainOfResponsibility - complete!');
 });
+app.get('/javascript/patterns/bridge', function(req, res){
+    var cmd = require('./bridge/bridgeDriver');
+    cmd.demoBridgePattern();
+
+    res.send('/javascript/patterns/bridge - complete!');
+});
 
 // TODO - complete
 app.get('/javascript/patterns/binarySearchTree', function(req, res){
