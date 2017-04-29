@@ -43,7 +43,12 @@ app.get('/javascript/patterns/bridge', function(req, res){
 
     res.send('/javascript/patterns/bridge - complete!');
 });
+app.get('/javascript/patterns/builder', function(req, res) {
+    var ref = require('./builder/builderDriver');
+    ref.demoBuilderPattern();
 
+    res.send('/javascript/patterns/builder - complete!');
+});
 app.get('/javascript/patterns/factory', function(req, res) {
     var ref = require('./factory/factoryDriver');
     ref.demoFactoryPattern();
