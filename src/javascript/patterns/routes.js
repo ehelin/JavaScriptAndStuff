@@ -55,6 +55,12 @@ app.get('/javascript/patterns/factory', function(req, res) {
 
     res.send('/javascript/patterns/factory - complete!');
 });
+app.get('/javascript/patterns/prototype', function(req, res) {
+    var ref = require('./prototype/prototypeDriver');
+    ref.demoPrototypePattern();
+
+    res.send('/javascript/patterns/prototype - complete!');
+});
 
 // TODO - complete
 app.get('/javascript/patterns/binarySearchTree', function(req, res){
