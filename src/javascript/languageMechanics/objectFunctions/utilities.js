@@ -23,11 +23,8 @@ function setUpObjectCollection() {
 
     return complexObjectArr;
 };
-function myEveryFunctionFive(aComplexObjectArrayItem) {
-    return aComplexObjectArrayItem.propertyOne >= 5;
-}
-function myEveryFunctionNegativeOne(aComplexObjectArrayItem) {
-    return aComplexObjectArrayItem.propertyOne >= -1;
+function setUpSimpleArray() {
+    return [1,2,3,4,5];
 }
 function buildName(firstName, ...restOfName) {
     return firstName + " " + restOfName.join(" ");
@@ -36,5 +33,4 @@ function buildName(firstName, ...restOfName) {
 module.exports.buildName = buildName;
 module.exports.setUpObjectCollection = setUpObjectCollection;
 module.exports.aComplexObjectArrayItem = aComplexObjectArrayItem;
-module.exports.myEveryFunctionFive = myEveryFunctionFive;
-module.exports.myEveryFunctionNegativeOne = myEveryFunctionNegativeOne;
+module.exports.setUpSimpleArray = setUpSimpleArray;

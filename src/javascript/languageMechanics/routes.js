@@ -27,11 +27,15 @@ app.get('/javascript/languagemechanics/objectfunctions', function (req, res)
     // objectFunctions.getPrototypeOf();
     // objectFunctions.getOwnPropertyNames();
     // objectFunctions.assign();
-    // objectFunctions.every();
     // objectFunctions.dotDotDotOperator();
     // objectFunctions.displayWithALambda();
     // objectFunctions.keysDemo();
-    objectFunctions.objectAsArrayFacade();
+    //objectFunctions.objectAsArrayFacade();
+
+    //array ==============
+    //objectFunctions.every();
+    objectFunctions.concat();
+    objectFunctions.copyWithin();
 
     res.send('/javascript/languagemechanics/objectfunctions - complete!');
 });

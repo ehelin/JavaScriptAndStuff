@@ -44,15 +44,6 @@ function objectFunctions () {
         console.log(newObj);
         console.log('');
     };
-    this.every = function () {
-        var utilities = require('./utilities');
-        var myComplexObjectArray = utilities.setUpObjectCollection();
-
-        console.log('array.every()-----------------------------');
-        console.log('Every element > 5: ' + myComplexObjectArray.every(utilities.myEveryFunctionFive));
-        console.log('Every element > -1: ' + myComplexObjectArray.every(utilities.myEveryFunctionNegativeOne));
-        console.log('');
-    };
     this.dotDotDotOperator = function () {
         var utilities = require('./utilities');
         let employeeName = utilities.buildName('Joseph', 'Samuel', 'Lucas', 'MacKinzie',
@@ -98,6 +89,40 @@ function objectFunctions () {
         console.log('');
         Object.keys(myObject).forEach((key) => console.log(myObject[key]));
     }
+    //array ============================
+    this.every = function () {
+        var utilities = require('./utilities');
+        var myComplexObjectArray = utilities.setUpObjectCollection();
+
+        console.log('array.every()-----------------------------');
+        console.log('Every element > 5: ' + myComplexObjectArray.every((element) => element.propertyOne >= 5));
+        console.log('Every element > -1: ' + myComplexObjectArray.every((element) => element.propertyOne >= -1));
+        console.log('');
+    };
+    this.concat = function() {
+        var utilities = require('./utilities');
+        var arrayOne = utilities.setUpSimpleArray();
+        var arrayTwo = utilities.setUpSimpleArray();
+
+        console.log('array.concat()-----------------------------');
+        console.log('arrayOne length: ', arrayOne.length);
+        console.log('arrayTwo length: ', arrayTwo.length);
+
+        var compositeArray = arrayOne.concat(arrayTwo);
+        console.log('composite array length: ', compositeArray.length);
+    };
+    this.copyWithin = function() {
+        var utilities = require('./utilities');
+        var array = utilities.setUpSimpleArray();
+
+        console.log('array.copyWithin()--------------------------');
+        console.log('copy first two elements to the 3rd and 4th position');
+        console.log('array before copy', array.forEach((element) => console.log(element)));
+        array.copyWithin(2, 0, 2);
+        console.log('array after copy', array.forEach((element) => console.log(element)));
+    };
+
+    // TODO - add .forEach() that returns an element after some condition is met
 };
 
 module.exports.objectFunctions = objectFunctions;
