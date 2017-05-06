@@ -9,11 +9,9 @@ function demoStatePattern() {
     var ctr = 1;
     while(ctr <= 5) {
         var concreteStateBase = createStateObject('State Object ' + ctr.toString());
-        Context.getCurrentState();
+
         concreteStateBase.execute(Context);
-
         console.log('');  //formatting
-
         ctr++
     };
 };
@@ -25,6 +23,7 @@ function createStateObject(name) {
 
     object.name = name;
     object.execute = function(context) {
+        context.getCurrentState();
         console.log(this.name + ' execute()');
         context.stateBase = this;
         context.getCurrentState();
