@@ -67,6 +67,12 @@ app.get('/javascript/patterns/adapter', function(req, res) {
 
     res.send('/javascript/patterns/adapter - complete!');
 });
+app.get('/javascript/patterns/state', function(req, res) {
+    var ref = require('./state/stateDriver');
+    ref.demoStatePattern();
+
+    res.send('/javascript/patterns/state - complete!');
+});
 
 // TODO - complete
 app.get('/javascript/patterns/binarySearchTree', function(req, res){
