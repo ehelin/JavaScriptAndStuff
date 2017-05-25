@@ -23,7 +23,6 @@ function demoCompositePattern() {
     console.log('listAllComponents: ');
     root.listAllComponents();
 }
-
 function addComponents(masterComponent, componentOne, componentTwo) {
     console.log('adding ' + masterComponent.name + ' components...');
 
