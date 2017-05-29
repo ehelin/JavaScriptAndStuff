@@ -2,8 +2,12 @@ var sortRef = require('../../sorting/bubble/bubbleDriver');
 
 function initDataSet() {
     var dataSet = [];
-    var dayOnePrices = [3.5, 2.99, 3.1, 3.05, 2.20, 2.8];
-    var dayTwoPrices = [3.55, 2.85, 3.12, 3.03, 2.19, 2.56];
+    //var dayOnePrices = [3.5, 2.99, 3.1, 3.05, 2.20, 2.8];
+    //var dayTwoPrices = [3.55, 2.85, 3.12, 3.03, 2.19, 2.56];
+    //var dayOnePrices = [3.5, 2.99, .5, 3.05, 1.2, 2.8];
+    //var dayTwoPrices = [3.55, 2.85, .8, 3.03, 1.1, 2.56];
+    var dayOnePrices = [3.5, .2, .5, 3.05, 1.2, 2.8];
+    var dayTwoPrices = [3.55, 2.85, .8, 3.03, 5.4, 2.56];
 
     console.log('Initializing dataset');
 
@@ -24,13 +28,19 @@ function initDataSet() {
 
 function recalculateClusterMean(cluster) {
     var numberOfItems = 0;
+    var dayOnePrices = 0;
+    var dayTwoPrices = 0;
 
     cluster.objectsInThisGroup.forEach(function(object) {
-        cluster.mean += object.dayOnePrice + object.dayTwoPrice;
-        numberOfItems += 2
+        dayOnePrices += object.dayOnePrice;
+        dayTwoPrices += object.dayTwoPrice;
+
+        numberOfItems += 1;
     });
 
-    cluster.mean = cluster.mean/numberOfItems;
+    cluster.dayOnePriceMean = dayOnePrices/numberOfItems;
+    cluster.dayTwoPriceMean = dayTwoPrices/numberOfItems;
+    cluster.mean = cluster.dayOnePriceMean + cluster.dayTwoPriceMean/2;
 
     return cluster;
 }
@@ -38,11 +48,9 @@ function recalculateClusterMean(cluster) {
 function createCluster(object) {
     var newObject = {
         objectsInThisGroup: [],
-        manufacturer: object.manufacturer,
-        dayOnePrice: object.dayOnePrice,
-        dayTwoPrice: object.dayTwoPrice,
-        mean: object.mean,
-        group: object.group,
+        dayOnePriceMean: object.dayOnePrice,
+        dayTwoPriceMean: object.dayTwoPrice,
+        mean: object.dayOnePrice + object.dayTwoPrice/2,
     };
 
     newObject.objectsInThisGroup.push(object);

@@ -40,10 +40,10 @@ function demoKMeans() {
     });
 
     console.log('minCluster');
-    minCluster.objectsInThisGroup.forEach((element) => console.log(element));
+    console.log(minCluster);
 
     console.log('maxCluster');
-    maxCluster.objectsInThisGroup.forEach((element) => console.log(element));
+    console.log(maxCluster);
 }
 
 module.exports.demoKMeans = demoKMeans;
