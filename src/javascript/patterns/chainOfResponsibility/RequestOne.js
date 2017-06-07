@@ -1,1 +1,0 @@
-var requestBase = require('./RequestAbs');
