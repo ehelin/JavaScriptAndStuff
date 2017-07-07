@@ -79,6 +79,12 @@ app.get('/javascript/patterns/composite', function(req, res) {
 
     res.send('/javascript/patterns/composite - complete!');
 });
+app.get('/javascript/patterns/abstractFactory', function(req, res) {
+    var ref = require('./abstractFactory/abstractFactoryDriver');
+    ref.demoAbstractFactoryDriver();
+
+    res.send('./javascript/patterns/abstactFactory - complete!');
+});
 
 // TODO - complete
 app.get('/javascript/patterns/binarySearchTree', function(req, res){
