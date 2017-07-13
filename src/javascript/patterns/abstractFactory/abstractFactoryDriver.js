@@ -27,7 +27,6 @@ function initializeFactory() {
 
         return object;
     };
-
     factory.makeObjectB = function() {
         var object = Object.create(absObjectXRef.AbsObjectX);
         object.name = 'ObjectB';
@@ -38,7 +37,6 @@ function initializeFactory() {
 
         return object;
     };
-
     factory.makeObjectC = function() {
         var object = Object.create(absObjectXRef.AbsObjectX);
         object.name = 'ObjectC';
@@ -52,7 +50,6 @@ function initializeFactory() {
 
     return factory;
 }
-
 function initializeClient() {
     console.log('inside initializeClient()');
 

@@ -85,6 +85,12 @@ app.get('/javascript/patterns/abstractFactory', function(req, res) {
 
     res.send('./javascript/patterns/abstactFactory - complete!');
 });
+app.get('/javascript/patterns/decorator', function(req, res) {
+    var ref = require('./decorator/decoratorDriver');
+    ref.demoDecoratorPattern();
+
+    res.send('./javascript/patterns/decorator - complete!');
+});
 
 // TODO - complete
 app.get('/javascript/patterns/binarySearchTree', function(req, res){
