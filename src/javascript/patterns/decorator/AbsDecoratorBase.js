@@ -1,8 +1,11 @@
 var AbsDecoratorBase = {
     base: undefined,
     name: undefined,
-    decoratorMethodOne: function() {
-        console.log('AbsDecoratorBase -> decoratorMethodOne() - should not be called');
+    methodOne: function() {
+        console.log('AbsDecoratorBase -> methodOne() - should not be called');
+    },
+    methodTwo: function() {
+        console.log('AbsDecoratorBase -> methodTwo() - should not be called');
     }
 };
 

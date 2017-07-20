@@ -8,11 +8,9 @@ function demoDecoratorPattern() {
     var concreteDecoratorBase = buildConcrete(concreteBase, 'ConcreteDecoratorBase');
 
     concreteBase.methodOne();
+    concreteBase.methodTwo();
     concreteDecoratorBase.methodOne();
-    concreteDecoratorBase.decoratorMethodOne();
-
-    // TODO - update decoratorMethodOne or it's methodOne to do something to the base
-
+    concreteDecoratorBase.methodTwo();
 }
 
 function buildConcrete(base, name) {
@@ -25,17 +23,23 @@ function buildConcrete(base, name) {
         concrete.methodOne = function() {
             console.log(this.name + '.methodOne() called');
         };
+        concrete.methodTwo = function() {
+            console.log(this.name + '.methodTwo() called');
+        };
     } else {
         concrete = Object.create(baseDecoratorRef.AbsDecoratorBase);
 
         concrete.name = name;
         concrete.base = base;
         concrete.methodOne = function() {
+            console.log(this.name + '.methodOne() - do something before calling base.methodOne()');
             console.log(this.name + '.methodOne() calling base.methodOne()');
             this.base.methodOne();
         };
-        concrete.decoratorMethodOne = function() {
-            console.log(this.name + '.decoratorMethodOne() called');
+        concrete.methodTwo = function() {
+            console.log(this.name + '.methodTwo() - do something before calling base.methodMethod2()');
+            console.log(this.name + '.methodTwo() calling base.methodTwo()');
+            this.base.methodTwo();
         };
     }
 

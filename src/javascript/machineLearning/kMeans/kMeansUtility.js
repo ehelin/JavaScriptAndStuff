@@ -1,22 +1,19 @@
 var sortRef = require('../../sorting/bubble/bubbleDriver');
 
-function initDataSet() {
+function initDataSet(dayOnePrices, dayTwoPrices) {
     var dataSet = [];
-    //var dayOnePrices = [3.5, 2.99, 3.1, 3.05, 2.20, 2.8];
-    //var dayTwoPrices = [3.55, 2.85, 3.12, 3.03, 2.19, 2.56];
-    //var dayOnePrices = [3.5, 2.99, .5, 3.05, 1.2, 2.8];
-    //var dayTwoPrices = [3.55, 2.85, .8, 3.03, 1.1, 2.56];
-    var dayOnePrices = [3.5, .2, .5, 3.05, 1.2, 2.8];
-    var dayTwoPrices = [3.55, 2.85, .8, 3.03, 5.4, 2.56];
 
     console.log('Initializing dataset');
 
-    for(var i=0; i<6; i++){
+    for(var i=0; i<dayOnePrices.length; i++){
         var element = {
+            individual: i+1,
             manufacturer: 'eggManufacturer' + i.toString(),
             dayOnePrice: dayOnePrices[i],
             dayTwoPrice: dayTwoPrices[i],
             mean: dayOnePrices[i] + dayTwoPrices[i]/2,
+            distanceToMin: 0,
+            distanceToMax: 0,
             group: null,
         };
 
@@ -38,18 +35,17 @@ function recalculateClusterMean(cluster) {
         numberOfItems += 1;
     });
 
-    cluster.dayOnePriceMean = dayOnePrices/numberOfItems;
-    cluster.dayTwoPriceMean = dayTwoPrices/numberOfItems;
-    cluster.mean = cluster.dayOnePriceMean + cluster.dayTwoPriceMean/2;
+    cluster.dayOnePrice = dayOnePrices/numberOfItems;
+    cluster.dayTwoPrice = dayTwoPrices/numberOfItems;
+    cluster.mean = cluster.dayOnePrice/2 + cluster.dayTwoPrice/2;
 
     return cluster;
 }
-
 function createCluster(object) {
     var newObject = {
         objectsInThisGroup: [],
-        dayOnePriceMean: object.dayOnePrice,
-        dayTwoPriceMean: object.dayTwoPrice,
+        dayOnePrice: object.dayOnePrice,
+        dayTwoPrice: object.dayTwoPrice,
         mean: object.dayOnePrice + object.dayTwoPrice/2,
     };
 
@@ -57,7 +53,6 @@ function createCluster(object) {
 
     return newObject
 }
-
 function exists(object, array) {
     var found = false;
 
@@ -77,7 +72,22 @@ function exists(object, array) {
 
     return found;
 }
+function removeIfExists(object, cluster) {
+    var newArray = [];
 
+    for(var i=0; i<cluster.objectsInThisGroup.length; i++) {
+        var element = cluster.objectsInThisGroup[i];
+
+        if(object.individual !== element.individual)
+        {
+            newArray.push(element);
+        }
+    }
+
+    cluster.objectsInThisGroup = newArray;
+
+    return cluster;
+}
 function getPricesSorted(dataSet, isDayOne) {
     var prices = [];
 
@@ -91,7 +101,6 @@ function getPricesSorted(dataSet, isDayOne) {
 
     return prices;
 }
-
 function getMinimumCluster(dataSet) {
     var curMinimumElement = null;
 
@@ -115,7 +124,6 @@ function getMinimumCluster(dataSet) {
 
     return cluster;
 }
-
 function getMaximumCluster(dataSet) {
     var curMaximumElement = null;
 
@@ -146,3 +154,4 @@ module.exports.getMaximumCluster = getMaximumCluster;
 module.exports.getMinimumCluster = getMinimumCluster;
 module.exports.exists = exists;
 module.exports.recalculateClusterMean = recalculateClusterMean;
+module.exports.removeIfExists = removeIfExists;
