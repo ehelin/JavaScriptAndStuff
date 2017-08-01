@@ -1,4 +1,4 @@
-var weights = [Math.random(), Math.random(), Math.random()];
+var weights = [];
 
 function runHouse(trainingSet) {
     var total = trainingSet.bedrooms * weights[0] + trainingSet.squareFeet * weights[1] + 1 * weights[2];
@@ -21,17 +21,22 @@ function run(trainingSet) {
     }
 }
 
+function showWeights() {
+    console.log('weights: ', weights);
+}
 function trainHouse(trainingSets) {
     var learningRate = 1;
     var totalError = 1;
     var ctr = 1;
+
+    weights = [Math.random(), Math.random(), Math.random()];
 
     while(totalError > .2) {
         for(var i=0; i<trainingSets.length; i++) {
             var trainingSet = trainingSets[i];
 
             var total = trainingSet.bedrooms * weights[0] + trainingSet.squareFeet * weights[1] + 1 * weights[2];
-            console.log('total: ', total);
+            //console.log('total: ', total);
 
             var output = 0;
             if (total >= 0) {
@@ -88,3 +93,4 @@ module.exports.train = train;
 module.exports.run = run;
 module.exports.runHouse = runHouse;
 module.exports.trainHouse = trainHouse;
+module.exports.showWeights = showWeights;

@@ -30,15 +30,15 @@ function getTrainingSet() {
         isCorrect: 0,
     });
     trainingSet.push({
-        bedrooms: 1,
+        bedrooms: 0,
         squareFeet: 0,
-        //bedrooms: 3.2,
-        //squareFeet: 2000,
+        //bedrooms: 2,
+        //squareFeet: 850,
         //neighborHood: townEnum.Normaltown,
-        salePrice: 250000,
+        salePrice: 150000,
         myGuess: 0,
         price: 0,
-        isCorrect: 1,
+        isCorrect: 0,
     });
     trainingSet.push({
         bedrooms: 1,
@@ -47,17 +47,6 @@ function getTrainingSet() {
         //squareFeet: 1800,
         //neighborHood: townEnum.Normaltown,
         salePrice: 245000,
-        myGuess: 0,
-        price: 0,
-        isCorrect: 0,
-    });
-    trainingSet.push({
-        bedrooms: 0,
-        squareFeet: 0,
-        //bedrooms: 2,
-        //squareFeet: 850,
-        //neighborHood: townEnum.Normaltown,
-        salePrice: 150000,
         myGuess: 0,
         price: 0,
         isCorrect: 0,
@@ -116,6 +105,17 @@ function getTrainingSet() {
         myGuess: 0,
         price: 0,
         isCorrect: 0,
+    });
+    trainingSet.push({
+        bedrooms: 1,
+        squareFeet: 0,
+        //bedrooms: 3.2,
+        //squareFeet: 2000,
+        //neighborHood: townEnum.Normaltown,
+        salePrice: 250000,
+        myGuess: 0,
+        price: 0,
+        isCorrect: 1,
     });
 
     return trainingSet;

@@ -13,20 +13,29 @@ function demoExercise0001() {
     console.log('training...');
     //trainingSets = trainRef.train(trainingSets);
     trainingSets = trainRef.trainHouse(trainingSets);
+    console.log(trainRef.showWeights());
 
     console.log('done training!');
 
     trainingSets.forEach(function(trainingSet) {
-        console.log('running: ', trainingSet);
+        //console.log('running: ', trainingSet);
 
         var output = trainRef.runHouse(trainingSet);
-        console.log('expected: ' + trainingSet.isCorrect);
-        console.log('actual: ' + output);
 
-        console.log(''); //formatting
+
+        if(output === 1) {
+            console.log('actual: ' + output);
+            console.log(trainingSet);
+
+            console.log(trainRef.showWeights());
+            // console.log('expected: ' + trainingSet.isCorrect);
+            // console.log('actual: ' + output);
+        }
+
+        //console.log(''); //formatting
     });
 
-    console.log('done running!');
+    //console.log('done running!');
     //===================================================
 
 
