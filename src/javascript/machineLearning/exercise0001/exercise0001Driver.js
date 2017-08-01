@@ -1,32 +1,60 @@
 var trainingSetRef = require('./trainingSet');
+var ref = require('./trainingSetPerceptron');
+var trainRef = require('./train');
 
 function demoExercise0001() {
     console.log('inside demoExercise0001()');
 
+    //===================================================
     console.log('getting training sets...');
+    //var trainingSets = ref.getTrainingSet();
     var trainingSets = trainingSetRef.getTrainingSet();
 
-    console.log('starting to train...');
-    train(trainingSets);
+    console.log('training...');
+    //trainingSets = trainRef.train(trainingSets);
+    trainingSets = trainRef.trainHouse(trainingSets);
 
     console.log('done training!');
 
-    //console.log('training...');
-    // trainingSets.forEach((trainingSet) => {
-    //     //console.log('training set: ', trainingSet);
-    //     trainingSet = train(trainingSet);
-    //
-    //     return trainingSet;
-    // });
+    trainingSets.forEach(function(trainingSet) {
+        console.log('running: ', trainingSet);
 
-    // var totalDifferenceSquared = Math.pow(totalDifference, 2);
-    // var cost = totalDifference/trainingSets.length * 2;
+        var output = trainRef.runHouse(trainingSet);
+        console.log('expected: ' + trainingSet.isCorrect);
+        console.log('actual: ' + output);
+
+        console.log(''); //formatting
+    });
+
+    console.log('done running!');
+    //===================================================
+
+
+    //----------------------------------------------------------
+    // console.log('getting training sets...');
+    // var trainingSets = trainingSetRef.getTrainingSet();
     //
-    // console.log('total difference: ', totalDifference);
-    // console.log('cost: ', cost);
+    // console.log('starting to train...');
+    // train(trainingSets);
     //
-    // console.log('result:');
-    // trainingSets.forEach((trainingSet) => console.log( trainingSet));
+    // console.log('done training!');
+    //
+    // //console.log('training...');
+    // // trainingSets.forEach((trainingSet) => {
+    // //     //console.log('training set: ', trainingSet);
+    // //     trainingSet = train(trainingSet);
+    // //
+    // //     return trainingSet;
+    // // });
+    //
+    // // var totalDifferenceSquared = Math.pow(totalDifference, 2);
+    // // var cost = totalDifference/trainingSets.length * 2;
+    // //
+    // // console.log('total difference: ', totalDifference);
+    // // console.log('cost: ', cost);
+    // //
+    // // console.log('result:');
+    // // trainingSets.forEach((trainingSet) => console.log( trainingSet));
 }
 
 //http://aass.oru.se/~lilien/ml/seminars/2007_02_01b-Janecek-Perceptron.pdf
@@ -38,6 +66,7 @@ var squareFeetWeight = Math.random();
 var neighBorWeight = Math.random();
 var biasWeight = Math.random();  //bias
 var totalDifference = 0.0;
+
 
 function train(trainingSets) {
     var learningRate = 1;
