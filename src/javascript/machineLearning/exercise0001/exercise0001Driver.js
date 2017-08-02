@@ -10,6 +10,8 @@ function demoExercise0001() {
     //var trainingSets = ref.getTrainingSet();
     var trainingSets = trainingSetRef.getTrainingSet();
 
+    //trainingSets.forEach(function(trainingSet) {console.log(trainingSet)});
+
     console.log('training...');
     //trainingSets = trainRef.train(trainingSets);
     trainingSets = trainRef.trainHouse(trainingSets);

@@ -52,6 +52,9 @@ function trainHouse(trainingSets) {
             totalError = Math.abs(error);
         }
 
+        console.log('totalError: ' + totalError);
+        console.log('ctr: ' + ctr);
+
         ctr++;
     }
 
