@@ -29,14 +29,16 @@ function trainHouse(trainingSets) {
     var totalError = 1;
     var ctr = 1;
 
-    weights = [Math.random(), Math.random(), Math.random()];
+    weights = [Math.random(), Math.random(), Math.random(), Math.random()];
 
     while(totalError > .2) {
         for(var i=0; i<trainingSets.length; i++) {
             var trainingSet = trainingSets[i];
 
-            var total = trainingSet.bedrooms * weights[0] + trainingSet.squareFeet * weights[1] + 1 * weights[2];
-            //console.log('total: ', total);
+            var total = trainingSet.bedrooms * weights[0]
+                + trainingSet.squareFeet * weights[1]
+                + trainingSet.neighborHood * weights[2]
+                + 1 * weights[3];
 
             var output = 0;
             if (total >= 0) {
@@ -47,13 +49,11 @@ function trainHouse(trainingSets) {
 
             weights[0] += learningRate * error * trainingSet.bedrooms;
             weights[1] += learningRate * error * trainingSet.squareFeet;
-            weights[2] += learningRate * error * 1;
+            weights[2] += learningRate * error * trainingSet.neighborHood;
+            weights[3] += learningRate * error * 1;
 
             totalError = Math.abs(error);
         }
-
-        console.log('totalError: ' + totalError);
-        console.log('ctr: ' + ctr);
 
         ctr++;
     }

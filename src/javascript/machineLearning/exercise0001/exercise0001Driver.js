@@ -5,41 +5,66 @@ var trainRef = require('./train');
 function demoExercise0001() {
     console.log('inside demoExercise0001()');
 
-    //===================================================
     console.log('getting training sets...');
-    //var trainingSets = ref.getTrainingSet();
     var trainingSets = trainingSetRef.getTrainingSet();
 
-    //trainingSets.forEach(function(trainingSet) {console.log(trainingSet)});
+    console.log('updating training sets...');
+    var updatedTrainingSets = [];
+    trainingSets.forEach(function(trainingSet) {
+        var newTrainingSet = {
+            bedrooms: trainingSet.bedrooms/100,
+            squareFeet: trainingSet.squareFeet/100,
+            neighborHood: trainingSet.neighborHood/3,
+            salePrice: trainingSet.salePrice,
+            myGuess: trainingSet.myGuess,
+            price: trainingSet.price,
+            isCorrect: trainingSet.isCorrect,
+        };
+
+        updatedTrainingSets.push(newTrainingSet)
+    });
 
     console.log('training...');
-    //trainingSets = trainRef.train(trainingSets);
-    trainingSets = trainRef.trainHouse(trainingSets);
-    console.log(trainRef.showWeights());
+    updatedTrainingSets = trainRef.trainHouse(updatedTrainingSets);
 
-    console.log('done training!');
+    console.log('getting run sets...');
+    var runSets = trainingSetRef.getTrainingSet();
 
-    trainingSets.forEach(function(trainingSet) {
-        //console.log('running: ', trainingSet);
+    //runSets.forEach((runSet) => console.log(runSet));
 
-        var output = trainRef.runHouse(trainingSet);
+    console.log('updating run sets...');
+    var updatedRunSets = [];
+    runSets.forEach(function(runSet) {
+        var newRunSet = {
+            bedrooms: runSet.bedrooms/100,
+            squareFeet: runSet.squareFeet/100,
+            neighborHood: runSet.neighborHood/3,
+            salePrice: runSet.salePrice,
+            myGuess: runSet.myGuess,
+            price: runSet.price,
+            isCorrect: runSet.isCorrect,
+        };
 
+        updatedRunSets.push(newRunSet)
+    });
+
+    //updatedRunSets.forEach((runSet) => console.log(runSet));
+
+    console.log('testing run sets...');
+    updatedRunSets.forEach(function(runSet) {
+        console.log('currentRunSet: ', runSet);
+
+        var output = trainRef.runHouse(runSet);
 
         if(output === 1) {
             console.log('actual: ' + output);
-            console.log(trainingSet);
+            console.log(runSet);
 
             console.log(trainRef.showWeights());
-            // console.log('expected: ' + trainingSet.isCorrect);
-            // console.log('actual: ' + output);
         }
-
-        //console.log(''); //formatting
     });
 
-    //console.log('done running!');
-    //===================================================
-
+    console.log('done running!');
 
     //----------------------------------------------------------
     // console.log('getting training sets...');
