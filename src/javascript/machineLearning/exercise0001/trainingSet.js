@@ -16,7 +16,7 @@ function getRunSet() {
         salePrice: 249990,
         myGuess: 0,
         price: 0,
-        isCorrect: 1,
+        expectedOutput: 1,
     });
     trainingSet.push({
         bedrooms: 3.2,
@@ -25,7 +25,7 @@ function getRunSet() {
         salePrice: 249990,
         myGuess: 0,
         price: 0,
-        isCorrect: 1,
+        expectedOutput: 1,
     });
     trainingSet.push({
         bedrooms: 2.8,
@@ -34,7 +34,7 @@ function getRunSet() {
         salePrice: 249990,
         myGuess: 0,
         price: 0,
-        isCorrect: 1,
+        expectedOutput: 1,
     });
 
     //bottom
@@ -45,7 +45,7 @@ function getRunSet() {
         salePrice: 249990,
         myGuess: 0,
         price: 0,
-        isCorrect: 0,
+        expectedOutput: 0,
     });
     runSet.push({
         bedrooms: 1,
@@ -54,7 +54,7 @@ function getRunSet() {
         salePrice: 249990,
         myGuess: 0,
         price: 0,
-        isCorrect: 0,
+        expectedOutput: 0,
     });
 
     //top
@@ -65,7 +65,7 @@ function getRunSet() {
         salePrice: 250001,
         myGuess: 0,
         price: 0,
-        isCorrect: 0,
+        expectedOutput: 0,
     });
     runSet.push({
         bedrooms: 56,
@@ -74,9 +74,10 @@ function getRunSet() {
         salePrice: 250001,
         myGuess: 0,
         price: 0,
-        isCorrect: 0,
+        expectedOutput: 0,
     });
 
+    return runSet;
 }
 
 function getTrainingSet() {
@@ -87,7 +88,7 @@ function getTrainingSet() {
         salePrice: 250001,
         myGuess: 0,
         price: 0,
-        isCorrect: 0,
+        expectedOutput: 0,
     });
     trainingSet.push({
         bedrooms: 4,
@@ -96,7 +97,7 @@ function getTrainingSet() {
         salePrice: 255000,
         myGuess: 0,
         price: 0,
-        isCorrect: 0,
+        expectedOutput: 0,
     });
     trainingSet.push({
         bedrooms: 2,
@@ -105,7 +106,7 @@ function getTrainingSet() {
         salePrice: 150000,
         myGuess: 0,
         price: 0,
-        isCorrect: 0,
+        expectedOutput: 0,
     });
     trainingSet.push({
         bedrooms: 2,
@@ -114,16 +115,7 @@ function getTrainingSet() {
         salePrice: 245000,
         myGuess: 0,
         price: 0,
-        isCorrect: 0,
-    });
-    trainingSet.push({
-        bedrooms: 3,
-        squareFeet: 1998,
-        neighborHood: townEnum.Normaltown,
-        salePrice: 249990,
-        myGuess: 0,
-        price: 0,
-        isCorrect: 1,
+        expectedOutput: 0,
     });
     trainingSet.push({
         bedrooms: 2,
@@ -132,7 +124,7 @@ function getTrainingSet() {
         salePrice: 245000,
         myGuess: 0,
         price: 0,
-        isCorrect: 0,
+        expectedOutput: 0,
     });
     trainingSet.push({
         bedrooms: 2,
@@ -141,7 +133,7 @@ function getTrainingSet() {
         salePrice: 300000,
         myGuess: 0,
         price: 0,
-        isCorrect: 0,
+        expectedOutput: 0,
     });
     trainingSet.push({
         bedrooms: 1,
@@ -150,7 +142,7 @@ function getTrainingSet() {
         salePrice: 78000,
         myGuess: 0,
         price: 0,
-        isCorrect: 0,
+        expectedOutput: 0,
     });
     trainingSet.push({
         bedrooms: 4,
@@ -159,7 +151,7 @@ function getTrainingSet() {
         salePrice: 150000,
         myGuess: 0,
         price: 0,
-        isCorrect: 0,
+        expectedOutput: 0,
     });
     trainingSet.push({
         bedrooms: 3.2,
@@ -168,7 +160,16 @@ function getTrainingSet() {
         salePrice: 250000,
         myGuess: 0,
         price: 0,
-        isCorrect: 1,
+        expectedOutput: 1,
+    });
+    trainingSet.push({
+        bedrooms: 3,
+        squareFeet: 1998,
+        neighborHood: townEnum.Normaltown,
+        salePrice: 249990,
+        myGuess: 0,
+        price: 0,
+        expectedOutput: 1,
     });
 
     return trainingSet;
