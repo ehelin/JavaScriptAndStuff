@@ -1,5 +1,5 @@
-var trainingSet = [];
-var runSet = [];
+
+
 
 townEnum = {
     SkidRow : 0,
@@ -8,6 +8,8 @@ townEnum = {
 };
 
 function getRunSet() {
+    var runSet = [];
+
     //correct ones
     runSet.push({
         bedrooms: 3,
@@ -18,7 +20,7 @@ function getRunSet() {
         price: 0,
         expectedOutput: 1,
     });
-    trainingSet.push({
+    runSet.push({
         bedrooms: 3.2,
         squareFeet: 1995,
         neighborHood: townEnum.Normaltown,
@@ -27,7 +29,7 @@ function getRunSet() {
         price: 0,
         expectedOutput: 1,
     });
-    trainingSet.push({
+    runSet.push({
         bedrooms: 2.8,
         squareFeet: 2000,
         neighborHood: townEnum.Normaltown,
@@ -57,21 +59,46 @@ function getRunSet() {
         expectedOutput: 0,
     });
 
-    //top
+    // //top
+    // runSet.push({
+    //     bedrooms: 5,
+    //     squareFeet: 3000,
+    //     neighborHood: townEnum.Normaltown,
+    //     salePrice: 250001,
+    //     myGuess: 0,
+    //     price: 0,
+    //     expectedOutput: 0,
+    // });
+    // runSet.push({
+    //     bedrooms: 5.6,
+    //     squareFeet: 8000,
+    //     neighborHood: townEnum.Normaltown,
+    //     salePrice: 250001,
+    //     myGuess: 0,
+    //     price: 0,
+    //     expectedOutput: 0,
+    // });
+
+    return runSet;
+}
+
+function getRunSetOld() {
+    var runSet = [];
+
     runSet.push({
-        bedrooms: 50,
-        squareFeet: 30000,
+        bedrooms: 3.2,
+        squareFeet: 2000,
         neighborHood: townEnum.Normaltown,
-        salePrice: 250001,
+        salePrice: 250000,
         myGuess: 0,
         price: 0,
-        expectedOutput: 0,
+        expectedOutput: 1,
     });
     runSet.push({
-        bedrooms: 56,
-        squareFeet: 80000,
-        neighborHood: townEnum.Normaltown,
-        salePrice: 250001,
+        bedrooms: 2,
+        squareFeet: 800,
+        neighborHood: townEnum.Hipsterton,
+        salePrice: 300000,
         myGuess: 0,
         price: 0,
         expectedOutput: 0,
@@ -81,6 +108,68 @@ function getRunSet() {
 }
 
 function getTrainingSet() {
+    var trainingSet = [];
+
+    // Why does it matter when I put the expected at the start
+
+    trainingSet.push({
+        bedrooms: 3,
+        squareFeet: 4000,
+        expectedOutput: 1,
+    });
+    trainingSet.push({
+        bedrooms: 2.8,
+        squareFeet: 900,
+        expectedOutput: 0,
+    });
+    trainingSet.push({
+        bedrooms: 1,
+        squareFeet: 1600,
+        expectedOutput: 0,
+    });
+    trainingSet.push({
+        bedrooms: 2,
+        squareFeet: 850,
+        expectedOutput: 0,
+    });
+    trainingSet.push({
+        bedrooms: 4,
+        squareFeet: 2000,
+        expectedOutput: 0,
+    });
+    // trainingSet.push({
+    //     bedrooms: 2,
+    //     squareFeet: 1800,
+    //     expectedOutput: 0,
+    // });
+    // trainingSet.push({
+    //     bedrooms: 2,
+    //     squareFeet: 1800,
+    //     expectedOutput: 0,
+    // });
+    // trainingSet.push({
+    //     bedrooms: 2,
+    //     squareFeet: 800,
+    //     expectedOutput: 0,
+    // });
+    // trainingSet.push({
+    //     bedrooms: 1,
+    //     squareFeet: 550,
+    //     expectedOutput: 0,
+    // });
+    // trainingSet.push({
+    //     bedrooms: 3.2,
+    //     squareFeet: 2000,
+    //     expectedOutput: 1,
+    // });
+
+    return trainingSet;
+}
+
+
+function getTrainingSetOlder() {
+    var trainingSet = [];
+
     trainingSet.push({
         bedrooms: 2.8,
         squareFeet: 2002,

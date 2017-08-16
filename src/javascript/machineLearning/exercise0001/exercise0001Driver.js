@@ -2,6 +2,8 @@ var trainingSetRef = require('./trainingSet');
 var perceptronTrainingSetRef = require('./trainingSetPerceptron');
 var trainRef = require('./train');
 
+//TODO - complete this exercise so that it works...list caveats in blog post and move on
+
 function demoExercise0001() {
     console.log('inside demoExercise0001()');
 
@@ -13,15 +15,17 @@ function runBasicPerceptron() {
     console.log('inside runBasicPerceptron()');
 
     console.log('getting training sets...');
-    var perceptronTrainingSets = perceptronTrainingSetRef.getTrainingSet();
+    var perceptronTrainingSets = perceptronTrainingSetRef.getTrainingSetWholeNumbers();
+    perceptronTrainingSets.forEach((perceptronTrainingSet) => console.log(perceptronTrainingSet));
 
     console.log('starting to train...');
-    perceptronTrainingSets = trainRef.train(perceptronTrainingSets);
+    var weights = trainRef.train(perceptronTrainingSets);
+    weights.forEach((weight) => console.log('weight: ', weight));
     console.log('done training!');
 
     console.log('testing run sets...');
     perceptronTrainingSets.forEach(function(perceptronTrainingSet) {
-        var output = trainRef.run(perceptronTrainingSet);
+        var output = trainRef.run(perceptronTrainingSet, weights);
 
         if(output === 1) {
             console.log('match found:');
@@ -40,43 +44,24 @@ function runHouse() {
     var updatedTrainingSets = [];
     trainingSets.forEach(function(trainingSet) {
         var newTrainingSet = {
-            bedrooms: trainingSet.bedrooms/100,
-            squareFeet: trainingSet.squareFeet/100,
-            neighborHood: trainingSet.neighborHood/3,
-            salePrice: trainingSet.salePrice,
-            myGuess: trainingSet.myGuess,
-            price: trainingSet.price,
+            bedrooms: trainingSet.bedrooms/10000,
+            squareFeet: trainingSet.squareFeet/10000,
             expectedOutput: trainingSet.expectedOutput,
         };
 
         updatedTrainingSets.push(newTrainingSet)
     });
 
+    updatedTrainingSets.forEach((updatedTrainingSet) => console.log(updatedTrainingSet));
+
     console.log('training...');
-    updatedTrainingSets = trainRef.trainHouse(updatedTrainingSets);
+    var weights = trainRef.trainHouse(updatedTrainingSets);
+    weights.forEach((weight) => console.log('weight: ', weight));
 
-    console.log('getting run sets...');
-    var runSets = trainingSetRef.getRunSet();
+    updatedTrainingSets.forEach(function(runSet) {
+        //console.log('running runset: ', runSet);
 
-    console.log('updating run sets...');
-    var updatedRunSets = [];
-    runSets.forEach(function(runSet) {
-        var newRunSet = {
-            bedrooms: runSet.bedrooms/100,
-            squareFeet: runSet.squareFeet/100,
-            neighborHood: runSet.neighborHood/3,
-            salePrice: runSet.salePrice,
-            myGuess: runSet.myGuess,
-            price: runSet.price,
-            expectedOutput: runSet.expectedOutput,
-        };
-
-        updatedRunSets.push(newRunSet)
-    });
-
-    console.log('testing run sets...');
-    updatedRunSets.forEach(function(runSet) {
-        var output = trainRef.runHouse(runSet);
+        var output = trainRef.runHouse(runSet, weights);
 
         if(output === 1) {
             console.log('match found:');
@@ -84,6 +69,40 @@ function runHouse() {
             console.log('output: ' + output);
         }
     });
+
+    // console.log('getting run sets...');
+    // var runSets = trainingSetRef.getRunSet();
+    // //runSets.forEach((runSet) => console.log(runSet));
+    // //
+    // console.log('updating run sets...');
+    // var updatedRunSets = [];
+    // runSets.forEach(function(runSet) {
+    //     //console.log('updating runset: ', runSet);
+    //
+    //     var newRunSet = {
+    //         bedrooms: runSet.bedrooms/100,
+    //         squareFeet: runSet.squareFeet/100,
+    //         neighborHood: runSet.neighborHood/3,
+    //         salePrice: runSet.salePrice,
+    //         myGuess: runSet.myGuess,
+    //         price: runSet.price,
+    //         expectedOutput: runSet.expectedOutput,
+    //     };
+    //
+    //     updatedRunSets.push(newRunSet)
+    // });
+    //
+    // updatedRunSets.forEach(function(runSet) {
+    //     //console.log('running runset: ', runSet);
+    //
+    //     var output = trainRef.runHouse(runSet, weights);
+    //
+    //     if(output === 1) {
+    //         console.log('match found:');
+    //         console.log(runSet);
+    //         console.log('output: ' + output);
+    //     }
+    // });
 
     console.log('done running!');
 }
