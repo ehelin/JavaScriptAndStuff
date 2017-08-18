@@ -1,122 +1,52 @@
-
-
-
-townEnum = {
-    SkidRow : 0,
-    Normaltown : 1,
-    Hipsterton : 2
-};
-
 function getRunSet() {
     var runSet = [];
 
-    //correct ones
     runSet.push({
         bedrooms: 3,
         squareFeet: 1998,
-        neighborHood: townEnum.Normaltown,
-        salePrice: 249990,
-        myGuess: 0,
-        price: 0,
-        expectedOutput: 1,
+        expectedOutput: 0,
     });
     runSet.push({
-        bedrooms: 3.2,
+        bedrooms: 3,
         squareFeet: 1995,
-        neighborHood: townEnum.Normaltown,
-        salePrice: 249990,
-        myGuess: 0,
-        price: 0,
-        expectedOutput: 1,
+        expectedOutput: 0,
     });
     runSet.push({
-        bedrooms: 2.8,
+        bedrooms: 2,
         squareFeet: 2000,
-        neighborHood: townEnum.Normaltown,
-        salePrice: 249990,
-        myGuess: 0,
-        price: 0,
-        expectedOutput: 1,
+        expectedOutput: 0,
     });
-
-    //bottom
     runSet.push({
         bedrooms: 0,
         squareFeet: 0,
-        neighborHood: townEnum.Normaltown,
-        salePrice: 249990,
-        myGuess: 0,
-        price: 0,
         expectedOutput: 0,
     });
     runSet.push({
         bedrooms: 1,
         squareFeet: 1000,
-        neighborHood: townEnum.Normaltown,
-        salePrice: 249990,
-        myGuess: 0,
-        price: 0,
         expectedOutput: 0,
     });
-
-    // //top
-    // runSet.push({
-    //     bedrooms: 5,
-    //     squareFeet: 3000,
-    //     neighborHood: townEnum.Normaltown,
-    //     salePrice: 250001,
-    //     myGuess: 0,
-    //     price: 0,
-    //     expectedOutput: 0,
-    // });
-    // runSet.push({
-    //     bedrooms: 5.6,
-    //     squareFeet: 8000,
-    //     neighborHood: townEnum.Normaltown,
-    //     salePrice: 250001,
-    //     myGuess: 0,
-    //     price: 0,
-    //     expectedOutput: 0,
-    // });
-
-    return runSet;
-}
-
-function getRunSetOld() {
-    var runSet = [];
-
     runSet.push({
-        bedrooms: 3.2,
-        squareFeet: 2000,
-        neighborHood: townEnum.Normaltown,
-        salePrice: 250000,
-        myGuess: 0,
-        price: 0,
-        expectedOutput: 1,
+        bedrooms: 3,
+        squareFeet: 3800,
+        expectedOutput: 0,
     });
     runSet.push({
         bedrooms: 2,
-        squareFeet: 800,
-        neighborHood: townEnum.Hipsterton,
-        salePrice: 300000,
-        myGuess: 0,
-        price: 0,
+        squareFeet: 3500,
         expectedOutput: 0,
     });
-
-    return runSet;
-}
-
-function getTrainingSet() {
-    var trainingSet = [];
-
-    // Why does it matter when I put the expected at the start
-
-    trainingSet.push({
+    runSet.push({
         bedrooms: 3,
         squareFeet: 4000,
         expectedOutput: 1,
     });
+
+    return runSet;
+}
+function getTrainingSet() {
+    var trainingSet = [];
+
     trainingSet.push({
         bedrooms: 2.8,
         squareFeet: 900,
@@ -137,127 +67,29 @@ function getTrainingSet() {
         squareFeet: 2000,
         expectedOutput: 0,
     });
-    // trainingSet.push({
-    //     bedrooms: 2,
-    //     squareFeet: 1800,
-    //     expectedOutput: 0,
-    // });
-    // trainingSet.push({
-    //     bedrooms: 2,
-    //     squareFeet: 1800,
-    //     expectedOutput: 0,
-    // });
-    // trainingSet.push({
-    //     bedrooms: 2,
-    //     squareFeet: 800,
-    //     expectedOutput: 0,
-    // });
-    // trainingSet.push({
-    //     bedrooms: 1,
-    //     squareFeet: 550,
-    //     expectedOutput: 0,
-    // });
-    // trainingSet.push({
-    //     bedrooms: 3.2,
-    //     squareFeet: 2000,
-    //     expectedOutput: 1,
-    // });
-
-    return trainingSet;
-}
-
-
-function getTrainingSetOlder() {
-    var trainingSet = [];
-
-    trainingSet.push({
-        bedrooms: 2.8,
-        squareFeet: 2002,
-        neighborHood: townEnum.Normaltown,
-        salePrice: 250001,
-        myGuess: 0,
-        price: 0,
-        expectedOutput: 0,
-    });
-    trainingSet.push({
-        bedrooms: 4,
-        squareFeet: 2200,
-        neighborHood: townEnum.Normaltown,
-        salePrice: 255000,
-        myGuess: 0,
-        price: 0,
-        expectedOutput: 0,
-    });
-    trainingSet.push({
-        bedrooms: 2,
-        squareFeet: 850,
-        neighborHood: townEnum.Normaltown,
-        salePrice: 150000,
-        myGuess: 0,
-        price: 0,
-        expectedOutput: 0,
-    });
     trainingSet.push({
         bedrooms: 2,
         squareFeet: 1800,
-        neighborHood: townEnum.Normaltown,
-        salePrice: 245000,
-        myGuess: 0,
-        price: 0,
-        expectedOutput: 0,
-    });
-    trainingSet.push({
-        bedrooms: 2,
-        squareFeet: 1800,
-        neighborHood: townEnum.Normaltown,
-        salePrice: 245000,
-        myGuess: 0,
-        price: 0,
         expectedOutput: 0,
     });
     trainingSet.push({
         bedrooms: 2,
         squareFeet: 800,
-        neighborHood: townEnum.Hipsterton,
-        salePrice: 300000,
-        myGuess: 0,
-        price: 0,
         expectedOutput: 0,
     });
     trainingSet.push({
         bedrooms: 1,
         squareFeet: 550,
-        neighborHood: townEnum.Normaltown,
-        salePrice: 78000,
-        myGuess: 0,
-        price: 0,
         expectedOutput: 0,
-    });
-    trainingSet.push({
-        bedrooms: 4,
-        squareFeet: 2000,
-        neighborHood: townEnum.SkidRow,
-        salePrice: 150000,
-        myGuess: 0,
-        price: 0,
-        expectedOutput: 0,
-    });
-    trainingSet.push({
-        bedrooms: 3.2,
-        squareFeet: 2000,
-        neighborHood: townEnum.Normaltown,
-        salePrice: 250000,
-        myGuess: 0,
-        price: 0,
-        expectedOutput: 1,
     });
     trainingSet.push({
         bedrooms: 3,
-        squareFeet: 1998,
-        neighborHood: townEnum.Normaltown,
-        salePrice: 249990,
-        myGuess: 0,
-        price: 0,
+        squareFeet: 2000,
+        expectedOutput: 0,
+    });
+    trainingSet.push({
+        bedrooms: 3,
+        squareFeet: 4000,
         expectedOutput: 1,
     });
 
@@ -265,5 +97,4 @@ function getTrainingSetOlder() {
 }
 
 module.exports.getTrainingSet = getTrainingSet;
-module.exports.townEnum = townEnum;
 module.exports.getRunSet = getRunSet;
