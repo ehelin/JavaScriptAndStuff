@@ -17,6 +17,15 @@ app.get('/javascript/machineLearning/kMeansLargerDataSets', function(req, res) {
     res.send('/javascript/machineLearning/kMeansLargerDataSets is complete!')
 });
 
+// ID3 ------------------------------------
+app.get('/javascript/machineLearning/iD3Algorithm', function(req, res) {
+    var ref = require('./iD3Algorithm/iD3AlgorithmDriver');
+
+    ref.demoiD3Algorithm();
+
+    res.send('/javascript/machineLearning/iD3Algorithm is complete!');
+});
+
 // Exercises ------------------------------------
 app.get('/javascript/machineLearning/exercise0001', function(req, res) {
     var ref = require('./exercise0001/exercise0001Driver');

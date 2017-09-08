@@ -88,6 +88,21 @@ function getTrainingSet() {
         expectedOutput: 0,
     });
     trainingSet.push({
+        bedrooms: 8,
+        squareFeet: 8000,
+        expectedOutput: 0,
+    });
+    trainingSet.push({
+        bedrooms: 10,
+        squareFeet: 5500,
+        expectedOutput: 0,
+    });
+    trainingSet.push({
+        bedrooms: 9,
+        squareFeet: 9000,
+        expectedOutput: 0,
+    });
+    trainingSet.push({
         bedrooms: 3,
         squareFeet: 4000,
         expectedOutput: 1,

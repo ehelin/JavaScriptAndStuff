@@ -5,7 +5,7 @@ var trainRef = require('./train');
 function demoExercise0001() {
     console.log('inside demoExercise0001()');
 
-    runBasicPerceptron();
+    //runBasicPerceptron();
     runHouse();
 }
 
