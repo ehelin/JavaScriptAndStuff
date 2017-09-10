@@ -24,9 +24,9 @@ function getNonSplitableDataSetDecision(data, decisionDataElementName) {
 }
 
 var childNodesToProcess = [];
-var data = [];
+
 function runWeatherDataSample() {
-    data = dataRef.getWeatherDiscreteDataSets();
+    var data = dataRef.getWeatherDiscreteDataSets();
 
     var node = buildNode(data);
     var node = processLeafNodes(data, node);
@@ -74,7 +74,7 @@ function processLeafNode(data, parentDataElement, node) {
 
         node = createNode(node.dataElement, decision, 0, 0, parentDataElement);
     } else {
-        matchingDataSets = removeUsedDataElements(matchingDataSets, parentDataElement);
+        matchingDataSets = removeUsedDataElements(data, matchingDataSets, parentDataElement);
         node = buildNode(matchingDataSets, node.dataElement);
     }
 
@@ -354,8 +354,8 @@ function sort(data) {
 
     return data;
 }
-function removeUsedDataElements(dataElement) {
-    var newData = [];
+function removeUsedDataElements(data, dataElement) {
+    //var newData = [];
 
     for (var ctr = 0; ctr < data.length; ctr++) {
         var curData = data[ctr];
@@ -363,7 +363,7 @@ function removeUsedDataElements(dataElement) {
         data[ctr] = curData;
     }
 
-    data = newData;
+    return data;
 }
 function getDataByDataElementAndSubDataElement(data, dataElement, subDataElement) {
     var matchedData = [];
