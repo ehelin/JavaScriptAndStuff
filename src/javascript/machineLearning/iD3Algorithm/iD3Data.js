@@ -1,4 +1,5 @@
 function getWeatherDiscreteDataSets() {
+    // NOTE: Base entropy is first element in each dataSet (i.e. decision) - always true/false are only values
     return [
         {
             Decision: false,
@@ -99,6 +100,10 @@ function getWeatherDiscreteDataSets() {
             Wind: 'Strong',
         },
     ];
+}
+
+function getWeatherDiscreteRunDataSets() {
+
 }
 
 module.exports.getWeatherDiscreteDataSets = getWeatherDiscreteDataSets;
