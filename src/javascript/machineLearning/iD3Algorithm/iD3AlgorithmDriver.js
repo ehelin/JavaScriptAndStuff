@@ -9,8 +9,6 @@ function demoiD3Algorithm() {
 
     runWeatherDataSample();
 }
-var cont = true;
-
 function getNonSplitableDataSetDecision(data, decisionDataElementName) {
     var decision = null;
 
@@ -24,6 +22,7 @@ function getNonSplitableDataSetDecision(data, decisionDataElementName) {
 }
 
 var childNodesToProcess = [];
+var usedDataAttributes = [];    // Handle duplicates
 
 function runWeatherDataSample() {
     var data = dataRef.getWeatherDiscreteDataSets();
@@ -33,20 +32,41 @@ function runWeatherDataSample() {
 
     console.log('inside runWeatherDataSample()');
 
-    var interationCtr = 0;  //do we need?
     while (childNodesToProcess.length > 0) {
-        processChildNodes(data);
-        //processLeafNodes(data, node);
-
-        //interationCtr++;  //put in some exit condition
+        processChildNodes();
     }
 }
 
-function processChildNodes(data) {
-    var test = 1;
-    for(var ctr=0; ctr<childNodesToProcess.length; ctr++){
-        var newChildeNode = processLeafNodes(data, childNodesToProcess[ctr]);
-        var teset1 = 2;
+function processChildNodes() {
+    var data = dataRef.getWeatherDiscreteDataSets();
+
+    for (var ctr = 0; ctr < childNodesToProcess.length; ctr++) {
+        var curChildNode = childNodesToProcess[ctr];
+
+        // HACK Alert - to finish exercise...return to handle more than the weather example
+        if (curChildNode.leaves.length >= 3) {
+            var newChildeNode = processLeafNodes(data, childNodesToProcess[ctr]);
+        } else {
+            // TODO - Start here
+            //  Issues:
+            //  1)  To pull what data items I need, I need the full inheritance chain (i.e. outlook/sunny/humidity/high)
+            //   This branch is a hack.  If 'seems' like you need to determine if there is more than
+            //   one than two leaf elements that need to have the entropy calculated.  If this case,
+            //   I thought I could hack my way to a solution by just calculating the true/false buckets...
+            //   til I ran into to needing the entire inheritance chain
+            //  2) The other issue is this solution has turned into coding the example, not the problem...I want
+            //     to be able to handle a real decision tree sample that is deeper than 2 iterations
+
+            var matchingDataSets = getDataByDataElementAndSubDataElement(data, curChildNode.dataElement, curChildNode.leaves[ctr].dataElement);
+
+
+
+            //var splitFurther = splitDataFurther(matchingDataSets, 'Decision');  // TODO - make decision a constant or something
+
+
+
+            var blah = 1;
+        }
     }
 }
 
@@ -64,7 +84,6 @@ function processLeafNodes(data, node) {
 
     return node;
 }
-
 function processLeafNode(data, parentDataElement, node) {
     var matchingDataSets = getDataByDataElementAndSubDataElement(data, parentDataElement, node.dataElement);
     var splitFurther = splitDataFurther(matchingDataSets, 'Decision');  // TODO - make decision a constant or something
@@ -74,7 +93,8 @@ function processLeafNode(data, parentDataElement, node) {
 
         node = createNode(node.dataElement, decision, 0, 0, parentDataElement);
     } else {
-        matchingDataSets = removeUsedDataElements(matchingDataSets, parentDataElement);
+        usedDataAttributes.push(parentDataElement);
+        matchingDataSets = removeUsedDataElements(matchingDataSets);
         node = buildNode(matchingDataSets, node.dataElement);
     }
 
@@ -84,7 +104,7 @@ function processLeafNode(data, parentDataElement, node) {
 function buildNode(data, nodeParentName = '') {
     var parent = '';
 
-    if(nodeParentName === '') {
+    if (nodeParentName === '') {
         parent = 'root';
     } else {
         parent = nodeParentName;
@@ -175,7 +195,7 @@ function buildNodeWithChildren(dataElementName, baseEntropy, gain, data, parent)
 
     var nodeWithChildren = createNode(dataElementName, [], baseEntropy, gain, parent);
 
-    for(var ctr=0; ctr<leaves.length; ctr++) {
+    for (var ctr = 0; ctr < leaves.length; ctr++) {
         var curLeaf = createNode(leaves[ctr], [], 0, 0, dataElementName);
 
         nodeWithChildren.leaves.push(curLeaf);
@@ -354,11 +374,15 @@ function sort(data) {
 
     return data;
 }
-function removeUsedDataElements(data, dataElement) {
-    for (var ctr = 0; ctr < data.length; ctr++) {
-        var curData = data[ctr];
-        delete curData[dataElement];
-        data[ctr] = curData;
+function removeUsedDataElements(data) {
+    for (var outer = 0; outer < usedDataAttributes.length; outer++) {
+        var dataElementToRemove = usedDataAttributes[outer];
+
+        for (var inner = 0; inner < data.length; inner++) {
+            var curData = data[inner];
+            delete curData[dataElementToRemove];
+            data[inner] = curData;
+        }
     }
 
     return data;
@@ -394,7 +418,7 @@ function splitDataFurther(data, decisionDataElementName) {
 
     return splitFurther;
 }
-function createNode(dataElement, leaves, baseEntropy, gain, parent){
+function createNode(dataElement, leaves, baseEntropy, gain, parent) {
     var node = {
         dataElement: dataElement,
         leaves: leaves,
@@ -405,17 +429,5 @@ function createNode(dataElement, leaves, baseEntropy, gain, parent){
 
     return node;
 }
-
-// function removeUsedDataElements(data, dataElement) {
-//     var newData = [];
-//
-//     for (var ctr = 0; ctr < data.length; ctr++) {
-//         var curData = data[ctr];
-//         delete curData[dataElement];
-//         data[ctr] = curData;
-//     }
-//
-//     return data;
-// }
 
 module.exports.demoiD3Algorithm = demoiD3Algorithm;
