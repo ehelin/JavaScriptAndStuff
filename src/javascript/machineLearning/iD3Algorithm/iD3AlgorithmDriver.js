@@ -74,7 +74,7 @@ function processLeafNode(data, parentDataElement, node) {
 
         node = createNode(node.dataElement, decision, 0, 0, parentDataElement);
     } else {
-        matchingDataSets = removeUsedDataElements(data, matchingDataSets, parentDataElement);
+        matchingDataSets = removeUsedDataElements(matchingDataSets, parentDataElement);
         node = buildNode(matchingDataSets, node.dataElement);
     }
 
@@ -355,8 +355,6 @@ function sort(data) {
     return data;
 }
 function removeUsedDataElements(data, dataElement) {
-    //var newData = [];
-
     for (var ctr = 0; ctr < data.length; ctr++) {
         var curData = data[ctr];
         delete curData[dataElement];
