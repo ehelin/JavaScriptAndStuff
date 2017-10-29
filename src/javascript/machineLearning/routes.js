@@ -34,3 +34,12 @@ app.get('/javascript/machineLearning/exercise0001', function(req, res) {
 
     res.send('/javascript/machineLearning/exercise0001 is complete!');
 });
+
+// Linear Regression -----------------------------
+app.get('/javascript/machineLearning/singleVariableLinearRegression', function(req, res) {
+    var ref = require('./singleVariableLinearRegression/singleVariableLinearRegressionDriver');
+
+    ref.demoSingleVariableLinearRegression();
+
+    res.send('/javascript/machineLearning/singleVariableLinearRegression is complete!');
+});
