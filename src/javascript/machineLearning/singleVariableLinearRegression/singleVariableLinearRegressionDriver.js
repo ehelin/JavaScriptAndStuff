@@ -3,13 +3,17 @@ var data = require('./data');
 function demoSingleVariableLinearRegression() {
     console.log('inside var demoSingleVariableLinearRegression');
 
-    const dataSets = data.getDataSets();
+    //runSingleVariable(data.getDataSetOne());
+    //runSingleVariable(data.getDataSetTwo());
+    runSingleVariable(data.getDataSetThree());
+}
 
-    const meanX = getMean(dataSets, true);
-    const meanY = getMean(dataSets, false);
+function runSingleVariable(dataSets) {
+    const meanX = getMean(dataSets[0], true);
+    const meanY = getMean(dataSets[0], false);
 
-    const numerator = calculateNumerator(dataSets, meanX, meanY);
-    const denominator = calculateDenominator(dataSets, meanX);
+    const numerator = calculateNumerator(dataSets[0], meanX, meanY);
+    const denominator = calculateDenominator(dataSets[0], meanX);
 
     const B1 = numerator/denominator;
     const B0 = meanY - B1 * meanX;
@@ -17,8 +21,9 @@ function demoSingleVariableLinearRegression() {
     console.log('B0: ', B0);
     console.log('B1: ', B1);
 
-    makePrediction(5, B0, B1);
-    makePrediction(7, B0, B1);
+    dataSets[1].forEach((dataSet) => {
+        makePrediction(dataSet.x, B0, B1);
+    });
 }
 
 function makePrediction(x, B0, B1) {
