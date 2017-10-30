@@ -1,13 +1,21 @@
 //Data Set Source - https://machinelearningmastery.com/simple-linear-regression-tutorial-for-machine-learning/
 function getDataSetOne() {
     const dataSets =  [
+        // [
+        //     {x: 'x', y: 'y', line: 'line'},
+        //     {x: 1,y: 1, line: 0},
+        //     {x: 2,y: 3, line: 1},
+        //     {x: 4,y: 3, line: 2},
+        //     {x: 3,y: 2, line: 3},
+        //     {x: 5,y: 5, line: 4},
+        // ],
         [
-            {x: 'x', y: 'y'},
-            {x: 1,y: 1},
-            {x: 2,y: 3},
-            {x: 4,y: 3},
-            {x: 3,y: 2},
-            {x: 5,y: 5},
+            {x: 'x', y: 'y', line: 'line'},
+            {x: 0,y: 0, line: 0},
+            {x: 1,y: 1, line: 2},
+            {x: 2,y: 2, line: 3},
+            {x: 3,y: 3, line: 4},
+            {x: 4,y: 4, line: 5},
         ],
         //predictions
         [
