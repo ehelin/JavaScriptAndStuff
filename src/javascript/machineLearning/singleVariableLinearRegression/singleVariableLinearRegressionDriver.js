@@ -8,9 +8,9 @@ function demoSingleVariableLinearRegression() {
     //runSingleVariable(data.getDataSetTwo());
     //runSingleVariable(data.getDataSetThree());
 
-    //var dataSet = data.getDataSetOne();
+    var dataSet = data.getDataSetOne();
     //var dataSet = data.getDataSetTwo();
-    var dataSet = data.getDataSetThree();
+    //var dataSet = data.getDataSetThree();
 
     return chart.getChart(
         dataSet[0],
