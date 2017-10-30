@@ -2,6 +2,7 @@
 function getDataSetOne() {
     const dataSets =  [
         [
+            {x: 'x', y: 'y'},
             {x: 1,y: 1},
             {x: 2,y: 3},
             {x: 4,y: 3},

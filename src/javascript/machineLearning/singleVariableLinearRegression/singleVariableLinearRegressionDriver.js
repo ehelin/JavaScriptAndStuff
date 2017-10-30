@@ -1,11 +1,15 @@
 var data = require('./data');
+var chart = require('./javascriptChart');
 
 function demoSingleVariableLinearRegression() {
     console.log('inside var demoSingleVariableLinearRegression');
 
+    var dataSet = data.getDataSetOne();
+
     //runSingleVariable(data.getDataSetOne());
     //runSingleVariable(data.getDataSetTwo());
-    runSingleVariable(data.getDataSetThree());
+    //runSingleVariable(data.getDataSetThree());
+    return chart.getChart(dataSet[0], 0, 5);
 }
 
 function runSingleVariable(dataSets) {
