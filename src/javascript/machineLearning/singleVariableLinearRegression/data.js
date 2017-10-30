@@ -12,10 +12,14 @@ function getDataSetOne() {
         //predictions
         [
             {x: 7,y: 0},
+        ],
+        //min/max
+        [
+            {minX: 0, maxX: 7, minY: 0, maxY: 7}
         ]
     ];
 
-    displayDataSet(dataSets);
+    //displayDataSet(dataSets);
 
     return dataSets;
 }
@@ -24,6 +28,7 @@ function getDataSetOne() {
 function getDataSetTwo() {
     const dataSets =  [
         [
+            {x: 'x', y: 'y'},
             {x: 1,y: 1},
             {x: 2,y: 2},
             {x: 3,y: 3},
@@ -31,10 +36,14 @@ function getDataSetTwo() {
         //predictions
         [
             {x: 4,y: 0},
+        ],
+        //min/max
+        [
+            {minX: 0, maxX: 4, minY: 0, maxY: 4}
         ]
     ];
 
-    displayDataSet(dataSets);
+    //displayDataSet(dataSets);
 
     return dataSets;
 }
@@ -43,6 +52,7 @@ function getDataSetTwo() {
 function getDataSetThree() {
     const dataSets =  [
         [
+            {x: 'square footage', y: 'house price'},
             {x: 2104, y: 399900},
             {x: 1600, y: 329900},
             {x: 2400, y: 369000},
@@ -97,10 +107,14 @@ function getDataSetThree() {
             {x: 4218,y: 0},  //638698.156052707
             {x: 852,y: 0},  //185886.03758637467 vs 179900
             {x: 853,y: 0},  //186020.56287409493
+        ],
+        //min/max
+        [
+            {minX: 0, maxX: 4478, minY: 0, maxY: 699900}
         ]
     ];
 
-    displayDataSet(dataSets);
+    //displayDataSet(dataSets);
 
     return dataSets;
 }

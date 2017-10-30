@@ -1,4 +1,10 @@
-function getChart(xyValues, pMinValue, pMaxValue) {
+function getChart(
+    xyValues,
+    pMinXValue,
+    pMaxXValue,
+    pMinYValue,
+    pMaxYValue
+) {
     var tableData = setUpTable(xyValues);
     var x = xyValues[0].x;
     var y = xyValues[0].y;
@@ -17,8 +23,8 @@ function getChart(xyValues, pMinValue, pMaxValue) {
         + '  '
         + '     var options = { '
         + '         title: \'' + x + '  vs. ' + y + ' comparison\', '
-        + '         hAxis: {title: \'' + xyValues[0].x + '\', minValue: ' + pMinValue + ', maxValue: ' + pMaxValue + '}, '
-        + '         vAxis: {title: \'' + xyValues[0].y + '\', minValue: ' + pMinValue + ', maxValue: ' + pMaxValue + '}, '
+        + '         hAxis: {title: \'' + xyValues[0].x + '\', minValue: ' + pMinXValue + ', maxValue: ' + pMaxXValue + '}, '
+        + '         vAxis: {title: \'' + xyValues[0].y + '\', minValue: ' + pMinYValue + ', maxValue: ' + pMaxYValue + '}, '
         + '         legend: \'none\' '
         + '     }; '
         + '  '
@@ -56,6 +62,8 @@ function setUpTable(xyValues) {
     });
 
     tableData += tableDataSuffix;
+
+    console.log('tableData: ', tableData);
 
     return tableData;
 }

@@ -4,12 +4,21 @@ var chart = require('./javascriptChart');
 function demoSingleVariableLinearRegression() {
     console.log('inside var demoSingleVariableLinearRegression');
 
-    var dataSet = data.getDataSetOne();
-
     //runSingleVariable(data.getDataSetOne());
     //runSingleVariable(data.getDataSetTwo());
     //runSingleVariable(data.getDataSetThree());
-    return chart.getChart(dataSet[0], 0, 5);
+
+    //var dataSet = data.getDataSetOne();
+    //var dataSet = data.getDataSetTwo();
+    var dataSet = data.getDataSetThree();
+
+    return chart.getChart(
+        dataSet[0],
+        dataSet[2][0].minX,
+        dataSet[2][0].maxX,
+        dataSet[2][0].minY,
+        dataSet[2][0].maxY,
+    );
 }
 
 function runSingleVariable(dataSets) {

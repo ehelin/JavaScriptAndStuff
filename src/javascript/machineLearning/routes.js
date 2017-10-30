@@ -41,7 +41,5 @@ app.get('/javascript/machineLearning/singleVariableLinearRegression', function(r
 
     var result = ref.demoSingleVariableLinearRegression();
 
-    //console.log('result: ', result);
-
     res.send(result);
 });
