@@ -1,16 +1,20 @@
 var data = require('./data');
 var chart = require('./javascriptChart');
 
-function demoSingleVariableLinearRegression() {
+function demoSingleVariableLinearRegression(dataSetNumber) {
     console.log('inside var demoSingleVariableLinearRegression');
 
-    var dataSet = data.getDataSetOne();
-    //var dataSet = data.getDataSetTwo();
-    //var dataSet = data.getDataSetThree();
+    var dataSet = null;
+
+    if (dataSetNumber === 1) {
+        dataSet = data.getDataSetOne();
+    } else if (dataSetNumber === 2) {
+        dataSet = data.getDataSetTwo();
+    } else if (dataSetNumber === 3) {
+        dataSet = data.getDataSetThree();
+    }
 
     dataSet = runSingleVariable(dataSet);
-    //runSingleVariable(data.getDataSetTwo());
-    //runSingleVariable(data.getDataSetThree());
 
     return chart.getChart(
         dataSet[0],
@@ -25,26 +29,24 @@ function runSingleVariable(dataSets) {
     const meanX = getMean(dataSets[0], true);
     const meanY = getMean(dataSets[0], false);
 
-    // TODO - start here...complete working in new line array element so this is calculated correctly
+    const numerator = calculateNumerator(dataSets[0], meanX, meanY);
+    const denominator = calculateDenominator(dataSets[0], meanX);
 
-    // const numerator = calculateNumerator(dataSets[0], meanX, meanY);
-    // const denominator = calculateDenominator(dataSets[0], meanX);
-    //
-    // const B1 = numerator/denominator;
-    // const B0 = meanY - B1 * meanX;
-    //
-    // console.log('B0: ', B0);
-    // console.log('B1: ', B1);
+    const B1 = numerator/denominator;
+    const B0 = meanY - B1 * meanX;
 
-    // dataSets[0].forEach((dataSet) => {
-    //     var y = makePrediction(dataSet.x, B0, B1);
-    //     console.log('y: ' + y);
-    //     dataSet.line = y ;
-    // });
+    console.log('B0: ', B0);
+    console.log('B1: ', B1);
 
-    // dataSets[1].forEach((dataSet) => {
-    //     makePrediction(dataSet.x, B0, B1);
-    // });
+    dataSets[0].forEach((dataSet) => {
+        var y = makePrediction(dataSet.x, B0, B1);
+        console.log('y: ' + y);
+        dataSet.line = y ;
+    });
+
+    dataSets[1].forEach((dataSet) => {
+        makePrediction(dataSet.x, B0, B1);
+    });
 
     return dataSets;
 }
@@ -66,7 +68,9 @@ function calculateDenominator(dataSets, meanX) {
     const denominatorX = calculateNumeratorPartOne(dataSets, true, meanX, true);
 
     denominatorX.forEach((xy) => {
-        sum = sum + xy;
+        if (!isNaN(parseInt(xy))) {
+            sum = sum + xy;
+        }
     });
 
     console.log('denominator->sum: ', sum);
@@ -116,8 +120,16 @@ function calculateNumeratorPartTwo(numeratorX, numeratorY) {
     var sum = 0;
 
     for(var i=0; i<numeratorX.length; i++) {
-        sum = sum + (numeratorX[i] * numeratorY[i]);
+        //console.log('x: ', numeratorX[i]);
+        //console.log('y: ', numeratorY[i]);
+
+        if (!isNaN(parseInt(numeratorX[i]) && !isNaN(parseInt(numeratorX[i])))) {
+            sum = sum + (numeratorX[i] * numeratorY[i]);
+        }
+
+        //console.log('sum: ', sum);
     }
+
 
     return sum;
 }
