@@ -36,24 +36,31 @@ app.get('/javascript/machineLearning/exercise0001', function(req, res) {
 });
 
 // Linear Regression -----------------------------
-app.get('/javascript/machineLearning/singleVariableLinearRegression/dataSetOne', function(req, res) {
-    var ref = require('./singleVariableLinearRegression/singleVariableLinearRegressionDriver');
+app.get('/javascript/machineLearning/singleVariableLinearRegressionAlgorithmOne/dataSetOne', function(req, res) {
+    var ref = require('./singleVariableLinearRegression/singleVariableLinearRegressionAlgorithmOneDriver');
 
     var result = ref.demoSingleVariableLinearRegression(1);
 
     res.send(result);
 });
-app.get('/javascript/machineLearning/singleVariableLinearRegression/dataSetTwo', function(req, res) {
-    var ref = require('./singleVariableLinearRegression/singleVariableLinearRegressionDriver');
+app.get('/javascript/machineLearning/singleVariableLinearRegressionAlgorithmOne/dataSetTwo', function(req, res) {
+    var ref = require('./singleVariableLinearRegression/singleVariableLinearRegressionAlgorithmOneDriver');
 
     var result = ref.demoSingleVariableLinearRegression(2);
 
     res.send(result);
 });
-app.get('/javascript/machineLearning/singleVariableLinearRegression/dataSetThree', function(req, res) {
-    var ref = require('./singleVariableLinearRegression/singleVariableLinearRegressionDriver');
+app.get('/javascript/machineLearning/singleVariableLinearRegressionAlgorithmOne/dataSetThree', function(req, res) {
+    var ref = require('./singleVariableLinearRegression/singleVariableLinearRegressionAlgorithmOneDriver');
 
     var result = ref.demoSingleVariableLinearRegression(3);
+
+    res.send(result);
+});
+app.get('/javascript/machineLearning/singleVariableLinearRegressionAlgorithmTwo/dataSetOne', function(req, res) {
+    var ref = require('./singleVariableLinearRegression/singleVariableLinearRegressionAlgorithmTwoDriver');
+
+    var result = ref.demoSingleVariableLinearRegression(1);
 
     res.send(result);
 });

@@ -2,7 +2,7 @@ var data = require('./data');
 var chart = require('./javascriptChart');
 
 function demoSingleVariableLinearRegression(dataSetNumber) {
-    console.log('inside var demoSingleVariableLinearRegression');
+    console.log('inside var demoSingleVariableLinearRegression - Algorithm 1');
 
     var dataSet = null;
 
@@ -39,9 +39,7 @@ function runSingleVariable(dataSets) {
     console.log('B1: ', B1);
 
     dataSets[0].forEach((dataSet) => {
-        var y = makePrediction(dataSet.x, B0, B1);
-        console.log('y: ' + y);
-        dataSet.line = y ;
+        dataSet.line = makePrediction(dataSet.x, B0, B1);
     });
 
     dataSets[1].forEach((dataSet) => {
@@ -73,8 +71,6 @@ function calculateDenominator(dataSets, meanX) {
         }
     });
 
-    console.log('denominator->sum: ', sum);
-
     return sum;
 }
 
@@ -85,8 +81,6 @@ function calculateNumerator(dataSets, meanX, meanY) {
     const numeratorY = calculateNumeratorPartOne(dataSets, false, meanY);
 
     numerator = calculateNumeratorPartTwo(numeratorX, numeratorY);
-
-    console.log('numerator: ', numerator);
 
     return numerator;
 }
@@ -110,26 +104,19 @@ function calculateNumeratorPartOne(dataSets, isX, mean, takeSquare) {
         }
     });
 
-    xyMinusMean.forEach((xyMinusMeanValue) => {
-        console.log(xyMinusMeanValue);
-    });
-
     return xyMinusMean;
 }
 function calculateNumeratorPartTwo(numeratorX, numeratorY) {
     var sum = 0;
 
     for(var i=0; i<numeratorX.length; i++) {
-        //console.log('x: ', numeratorX[i]);
-        //console.log('y: ', numeratorY[i]);
+        var xNan = isNaN(parseInt(numeratorX[i]));
+        var yNan = isNaN(parseInt(numeratorY[i]));
 
-        if (!isNaN(parseInt(numeratorX[i]) && !isNaN(parseInt(numeratorX[i])))) {
+        if (!xNan && !yNan) {
             sum = sum + (numeratorX[i] * numeratorY[i]);
         }
-
-        //console.log('sum: ', sum);
     }
-
 
     return sum;
 }

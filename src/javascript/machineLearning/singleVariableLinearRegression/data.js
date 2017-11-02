@@ -1,4 +1,3 @@
-//Data Set Source - https://machinelearningmastery.com/simple-linear-regression-tutorial-for-machine-learning/
 function getDataSetOne() {
     const dataSets =  [
         [
@@ -19,12 +18,10 @@ function getDataSetOne() {
         ]
     ];
 
-    //displayDataSet(dataSets);
 
     return dataSets;
 }
 
-//Data Set Source - https://www.coursera.org/learn/machine-learning
 function getDataSetTwo() {
     const dataSets =  [
         [
@@ -43,12 +40,9 @@ function getDataSetTwo() {
         ]
     ];
 
-    //displayDataSet(dataSets);
-
     return dataSets;
 }
 
-//Data Set Source - https://github.com/girishkuniyal/Predict-housing-prices-in-Portland
 function getDataSetThree() {
     const dataSets =  [
         [
@@ -114,20 +108,7 @@ function getDataSetThree() {
         ]
     ];
 
-    //displayDataSet(dataSets);
-
     return dataSets;
-}
-
-function displayDataSet(dataSets) {
-
-    dataSets[0].forEach((dataSet) => {
-        console.log(dataSet);
-    });
-
-    dataSets[1].forEach((dataSet) => {
-        console.log(dataSet);
-    });
 }
 
 module.exports.getDataSetOne = getDataSetOne;
