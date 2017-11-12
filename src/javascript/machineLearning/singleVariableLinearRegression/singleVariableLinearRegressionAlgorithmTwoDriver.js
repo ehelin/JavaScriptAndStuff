@@ -6,7 +6,7 @@ const NOT_SET_YET = 999;
 
 // Algorithm
 // y = B0 + B1 * x
-// B1 = 1/2 m sum((xi-yi)^2)
+// B0 = 1/2 m sum((xi-yi)^2)
 
 function demoSingleVariableLinearRegression(dataSetNumber) {
     console.log('inside var demoSingleVariableLinearRegression - Algorithm 2');
@@ -30,8 +30,6 @@ function demoSingleVariableLinearRegression(dataSetNumber) {
         dataSet[2][0].minY,
         dataSet[2][0].maxY,
     );
-
-    return 'TODO - implement second algorithm';
 }
 
 function runSingleVariable(dataSets) {
