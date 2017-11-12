@@ -1,5 +1,11 @@
 var data = require('./data');
 var chart = require('./javascriptChart');
+var utils = require('./utils');
+
+// Algorithm
+// y = B0 + B1 * x
+// B1 = sum((xi-mean(x)) * (yi-mean(y))) / sum((xi – mean(x))^2)
+// B0 = mean(y) – B1 * mean(x)
 
 function demoSingleVariableLinearRegression(dataSetNumber) {
     console.log('inside var demoSingleVariableLinearRegression - Algorithm 1');
@@ -39,26 +45,14 @@ function runSingleVariable(dataSets) {
     console.log('B1: ', B1);
 
     dataSets[0].forEach((dataSet) => {
-        dataSet.line = makePrediction(dataSet.x, B0, B1);
+        dataSet.line = utils.makePrediction(dataSet.x, B0, B1, false);
     });
 
     dataSets[1].forEach((dataSet) => {
-        makePrediction(dataSet.x, B0, B1);
+        utils.makePrediction(dataSet.x, B0, B1, true);
     });
 
     return dataSets;
-}
-
-function makePrediction(x, B0, B1) {
-    console.log('Prediction for x: ', x);
-    console.log('Prediction for B0: ', B0);
-    console.log('Prediction for B1: ', B1);
-
-    const y = B0 + B1 * x;
-
-    console.log('Predicted y value: ', y);
-
-    return y;
 }
 
 function calculateDenominator(dataSets, meanX) {
