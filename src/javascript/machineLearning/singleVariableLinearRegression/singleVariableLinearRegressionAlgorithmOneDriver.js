@@ -28,6 +28,7 @@ function demoSingleVariableLinearRegression(dataSetNumber) {
         dataSet[2][0].maxX,
         dataSet[2][0].minY,
         dataSet[2][0].maxY,
+        'Data with Prediction Line'
     );
 }
 

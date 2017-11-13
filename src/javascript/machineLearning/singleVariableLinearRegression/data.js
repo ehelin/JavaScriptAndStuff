@@ -15,7 +15,16 @@ function getDataSetOne() {
         //min/max
         [
             {minX: 0, maxX: 7, minY: 0, maxY: 7}
-        ]
+        ],
+        //cost function
+        [
+            {x: 'x', y: 'y', line: 'line'},
+            {x: 0,y: 0, line: 0},
+            {x: 0,y: 0, line: 0},
+            {x: 0,y: 0, line: 0},
+            {x: 0,y: 0, line: 0},
+            {x: 0,y: 0, line: 0},
+        ],
     ];
 
 
@@ -37,7 +46,14 @@ function getDataSetTwo() {
         //min/max
         [
             {minX: 0, maxX: 4, minY: 0, maxY: 4}
-        ]
+        ],
+        //cost function
+        [
+            {x: 'x', y: 'y', line: 'line'},
+            {x: 0,y: 0, line: 0},
+            {x: 0,y: 0, line: 0},
+            {x: 0,y: 0, line: 0},
+        ],
     ];
 
     return dataSets;
@@ -105,7 +121,58 @@ function getDataSetThree() {
         //min/max
         [
             {minX: 0, maxX: 4478, minY: 0, maxY: 699900}
-        ]
+        ],
+        //cost function
+        [
+            {x: 'square footage', y: 'house price', line: 'line'},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+            {x: 0, y: 0, line: 0},
+        ],
     ];
 
     return dataSets;

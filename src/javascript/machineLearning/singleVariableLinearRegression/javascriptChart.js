@@ -3,7 +3,8 @@ function getChart(
     pMinXValue,
     pMaxXValue,
     pMinYValue,
-    pMaxYValue
+    pMaxYValue,
+    title
 ) {
     var tableData = setUpTable(xyValues);
 
@@ -45,6 +46,7 @@ function getChart(
         + ' </script> '
         + ' </head> '
         + ' <body> '
+        + ' <p>' + title + '</p> '
         + ' <div id="chart_div" style="width: 900px; height: 500px;"></div> '
         + ' </body> '
         + ' </html> ';

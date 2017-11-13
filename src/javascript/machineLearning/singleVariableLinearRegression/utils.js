@@ -14,17 +14,4 @@ function makePrediction(x, B0, B1, output) {
     return y;
 }
 
-function getLargestXValue(dataSets) {
-    var largestX = 0;
-
-    dataSets[0].forEach((dataSet) => {
-       if (dataSet.x > largestX) {
-           largestX = dataSet.x;
-       }
-    });
-
-    return largestX;
-}
-
 module.exports.makePrediction = makePrediction;
-module.exports.getLargestXValue = getLargestXValue;

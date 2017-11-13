@@ -82,3 +82,26 @@ app.get('/javascript/machineLearning/singleVariableLinearRegressionAlgorithmTwo/
     res.send(result);
 });
 
+//Algorithm 2 Cost function graph
+app.get('/javascript/machineLearning/singleVariableLinearRegressionAlgorithmTwoCostFunction/dataSetOne', function(req, res) {
+    var ref = require('./singleVariableLinearRegression/singleVariableLinearRegressionAlgorithmTwoDriver');
+
+    var result = ref.demoSingleVariableLinearRegression(1, true);
+
+    res.send(result);
+});
+app.get('/javascript/machineLearning/singleVariableLinearRegressionAlgorithmTwoCostFunction/dataSetTwo', function(req, res) {
+    var ref = require('./singleVariableLinearRegression/singleVariableLinearRegressionAlgorithmTwoDriver');
+
+    var result = ref.demoSingleVariableLinearRegression(2, true);
+
+    res.send(result);
+});
+app.get('/javascript/machineLearning/singleVariableLinearRegressionAlgorithmTwoCostFunction/dataSetThree', function(req, res) {
+    var ref = require('./singleVariableLinearRegression/singleVariableLinearRegressionAlgorithmTwoDriver');
+
+    var result = ref.demoSingleVariableLinearRegression(3, true);
+
+    res.send(result);
+});
+

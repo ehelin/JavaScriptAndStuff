@@ -8,7 +8,7 @@ const NOT_SET_YET = 999;
 // y = B0 + B1 * x
 // B0 = 1/2 m sum((xi-yi)^2)
 
-function demoSingleVariableLinearRegression(dataSetNumber) {
+function demoSingleVariableLinearRegression(dataSetNumber, showCostFunction) {
     console.log('inside var demoSingleVariableLinearRegression - Algorithm 2');
 
     var dataSet = null;
@@ -22,43 +22,67 @@ function demoSingleVariableLinearRegression(dataSetNumber) {
     }
 
     dataSet = runSingleVariable(dataSet);
+    dataSet[3].forEach((dataSet) => {
+       console.log('contents: ', dataSet);
+    });
 
-    return chart.getChart(
-        dataSet[0],
-        dataSet[2][0].minX,
-        dataSet[2][0].maxX,
-        dataSet[2][0].minY,
-        dataSet[2][0].maxY,
-    );
+    if (showCostFunction) {
+        return chart.getChart(
+            dataSet[3],
+            dataSet[2][0].minX,
+            dataSet[2][0].maxX,
+            dataSet[2][0].minY,
+            dataSet[2][0].maxY,
+            'Cost Function'
+        );
+    } else {
+        return chart.getChart(
+            dataSet[0],
+            dataSet[2][0].minX,
+            dataSet[2][0].maxX,
+            dataSet[2][0].minY,
+            dataSet[2][0].maxY,
+            'Data with Prediction Line'
+        );
+    }
 }
 
 function runSingleVariable(dataSets) {
     const lowestB0B1 = calculateLowestB0B1(dataSets);
 
-    console.log('lowestB0B1: ', lowestB0B1);
-    console.log('');  //formatting
-
     dataSets[0].forEach((dataSet) => {
         dataSet.line = utils.makePrediction(dataSet.x, lowestB0B1.lowestB0, lowestB0B1.lowestB1, false);
     });
-    console.log('');  //formatting
 
     dataSets[1].forEach((dataSet) => {
         utils.makePrediction(dataSet.x, lowestB0B1.lowestB0, lowestB0B1.lowestB1, true);
+    });
+
+    var ctr = 0;
+    dataSets[3].forEach((dataSet) => {
+        if (ctr > 0) {//skip title
+            dataSet.x = lowestB0B1.b0b1[ctr].b1;
+            dataSet.y = lowestB0B1.b0b1[ctr].b0;
+        }
+
+        ctr++
     });
 
     return dataSets;
 }
 
 function calculateLowestB0B1(dataSets) {
-    const largestX = utils.getLargestXValue(dataSets);
+    const b0B1Values = [];
+
+    const largestX = dataSets[0].length;
+    console.log('largestX: ', largestX);
+
     const B1Values = getB1Values(largestX);
+
     var lowestB0 = NOT_SET_YET;
     var lowestB1 = NOT_SET_YET;
 
     B1Values.forEach((B1Value) => {
-        console.log('current B1 Value: ', B1Value);
-
         var B0 = calculateB0(dataSets, B1Value);
 
         if (lowestB0 === NOT_SET_YET || (B0 < lowestB0)) {
@@ -66,12 +90,13 @@ function calculateLowestB0B1(dataSets) {
             lowestB1 = B1Value;
         }
 
-        console.log('B0: ', B0);
+        b0B1Values.push({b0: B0, b1: B1Value});
     });
 
     const lowestB0B1 = {
         lowestB0,
-        lowestB1
+        lowestB1,
+        b0b1: b0B1Values,
     };
 
     return lowestB0B1;
@@ -103,7 +128,7 @@ function getB1Values(largestX) {
 
     while(ctr <= largestX) {
         B1Values.push(ctr);
-        ctr += .25;
+        ctr += 1;//.25;
     }
 
     return B1Values;
