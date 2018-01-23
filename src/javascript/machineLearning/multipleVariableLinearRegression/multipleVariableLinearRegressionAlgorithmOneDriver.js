@@ -1,35 +1,72 @@
-// TODO - change of plans...figure out how to calculate coefficients in simple and multiple linear regression (i.e. y = coefficient0 + coefficient1x1 + coefficient2x2 + coefficientmxm)
-
-
-// Algorithm
-
-// NOTES
-// * Adding more independent variables that makes things worse is called overfitting
-// * When two independent variables are related to each other, its called multicolleanarity
-// * Analyzing the independent variable relationships with each other should be analyzed
-//   so that (ideally) they are related to the dependent variable, but not each other
-
-// * multiple regression model - y = B0 + B1X1 + B2X2 + ... BxXx + epsilon
-// y = what we want to calculate
-// epsilon = error
-// B0 is intercept
-
-// * multiple regression equation - E(y) = B0 + B1X1 + B2X2 + ... BxXx
-// epsilon (i.e. error) is assumed to be 0 here
-
-//* estimated multiple regression equation = y = = b0 + b1x1 + b2x2 + ... bxxx
-
-//https://www.youtube.com/watch?v=2I_AYIECCOQ&list=PLIeGtxpvyG-IqjoU8IiF0Yu1WtxNq_4z-&index=2
-// * process
-// - compare each independent variable to y (2d charts) - are they related
-// -- if no relationship, do not use that variable in the multiple regression (to be used, there should be a string linear relatiohship between it and the dependant variable)
-// - compare each independent variable to each other (2d charts)
-// -- if there is a relationship, do not use one of the variables (to be used, they should not be related)
+const dataSetSource = require('./data');
 
 function demoMultipleVariableLinearRegression(dataSetNumber) {
     console.log('inside var demoMultipleVariableLinearRegression - Algorithm 1 - Dataset' + dataSetNumber);
 
+    if (dataSetNumber === 1) {
+        simpleLinearRegressionCoefficientCalculation();
+    }
+
     return 'inside var demoMultipleVariableLinearRegression - Algorithm 1 - Dataset' + dataSetNumber;
+}
+function simpleLinearRegressionCoefficientCalculation() {
+    let B0 = 0;
+    let B1 = 0;
+    let error = 0;   //is error cummulative or 0 for each iteration?
+    const alpha = .01;  //aka learning rate
+
+    let dataSets = dataSetSource.getGradientDescentDataSetOne();
+    const coefficients = calculateSimpleLinearRegressionCoefficients(dataSets[0]);
+
+    makePrediction(coefficients, dataSets[1]);
+}
+function makePrediction(coefficients, predictions) {
+    console.log('coefficients: ', coefficients);
+
+    predictions.forEach((prediction) => {
+        console.log('prediction: ', prediction);
+
+        const predictedValue = coefficients.B0 + coefficients.B1 * prediction.x;
+
+        console.log('prediction for ' + prediction.x + ' is ' + predictedValue);
+        console.log('');  //formatting
+    });
+}
+function calculateSimpleLinearRegressionCoefficients(dataSets) {
+    let B0 = 0;
+    let B1 = 0;
+    let error = 0;   //is error cummulative or 0 for each iteration?
+    const alpha = .01;  //aka learning rate
+
+    let ctr = 2;
+    while(true) {
+
+        if (ctr>22) {
+            break;
+        }
+
+        for(let i=0; i<dataSets.length; i++) {
+            const currentDataset = dataSets[i];
+
+            var xNan = isNaN(parseInt(currentDataset.x));
+            var yNan = isNaN(parseInt(currentDataset.y));
+
+            if (!xNan && !yNan) {
+                let p = B0 + B1 * currentDataset.x;
+                error = p - currentDataset.y;
+
+                B0 = B0 - alpha * error;
+                B1 = B1 - alpha * error * currentDataset.x;
+
+                ctr++;
+            }
+        }
+    }
+
+    return {
+        B0,
+        B1,
+    }
 }
 
 module.exports.demoMultipleVariableLinearRegression = demoMultipleVariableLinearRegression;
