@@ -1,5 +1,8 @@
 const dataSetSource = require('./data');
 
+// TODO - works for first two data sets (simple one parameter linear regression), but not multi parameter
+// Try again with the two parameter data set here - http://reliawiki.org/index.php/Multiple_Linear_Regression_Analysis
+
 function demoMultipleVariableLinearRegression(dataSetNumber) {
     console.log('inside var demoMultipleVariableLinearRegression - Algorithm 1 - Dataset' + dataSetNumber);
 
