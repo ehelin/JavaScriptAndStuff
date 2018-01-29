@@ -7,14 +7,13 @@ function demoMultipleVariableLinearRegression(dataSetNumber) {
 
     if (dataSetNumber === 1) {
         dataSets = dataSetSource.getGradientDescentDataSetOne();
-        linearRegressionCoefficientCalculation(dataSets);
     } else if (dataSetNumber === 2) {
         dataSets = dataSetSource.getGradientDescentDataSetTwo();
+    } else if (dataSetNumber === 3) {
+        dataSets = dataSetSource.getGradientDescentDataSetThree();
     }
 
-    // if (dataSetNumber === 1) {
-    //     simpleLinearRegressionCoefficientCalculation();
-    // }
+    linearRegressionCoefficientCalculation(dataSets);
 
     return 'inside var demoMultipleVariableLinearRegression - Algorithm 1 - Dataset' + dataSetNumber;
 }
@@ -24,46 +23,71 @@ function linearRegressionCoefficientCalculation(dataSets) {
     makePrediction(coefficients, dataSets[1]);
 }
 function calculateSimpleLinearRegressionCoefficients(dataSets) {
+    console.log('inside calculateSimpleLinearRegressionCoefficients()');
+
     let error = 0;   //is error cummulative or 0 for each iteration?
     const alpha = .01;  //aka learning rate
 
     const coefficients = getCoefficientArray(dataSets);
 
     let interactionCnt = 2;
+    let breakEarly = false;
     while(true) {
 
-        if (interactionCnt>22) {
+        if (interactionCnt>200) {
             break;
         }
 
         for(let outer=0; outer<dataSets.length; outer++) {
             const currentDataset = dataSets[outer];
 
-            // TODO - handle multiple x1, x2, etc.
-            var xNan = isNaN(parseInt(currentDataset.x1));
-            var yNan = isNaN(parseInt(currentDataset.y));
+            console.log('currentDataSet: ', currentDataset);
 
-            const currentCoefficientTotal = getPValue(coefficients);
+            //skip first row which are labels
+            if (outer > 0) {
+                const currentCoefficientTotal = getPValue(coefficients);
 
-            for(let inner=0; inner<coefficients.length; inner++) {
+                let p = 0;
+                for (let inner = 1; inner <= currentDataset.xCount; inner++) {
+                    const currentX = currentDataset['x' + inner];
+                    const coefficient = coefficients[inner];
 
-                if (!xNan && !yNan) {
+                    console.log('currentX: ', currentX);
+                    console.log(coefficient);
 
-                    // TODO - handle multiple x1, x2, etc.
-                    let p = currentCoefficientTotal * currentDataset.x1;
-                    error = p - currentDataset.y;
+                    p += currentX * coefficient;
+                }
+
+                p += coefficients[0];
+                console.log('p: ', p);
+
+                error = p - currentDataset.y;
+                console.log('error: ', error);
+
+                // breakEarly = true;
+                // break;
+
+                let coefficientXValueTotals = 0;
+                for(let inner=1; inner<=currentDataset.xCount; inner++) {
+                    const currentX = currentDataset['x' + inner];
 
                     if (inner === 0) {
                         coefficients[inner] = coefficients[inner] - alpha * error;
                     } else {
-
-                        // TODO - handle multiple x1, x2, etc.
-                        coefficients[inner] = coefficients[inner] - alpha * error * currentDataset.x1;
+                        coefficients[inner] = coefficients[inner] - alpha * error * currentX;
                     }
                 }
-
-                interactionCnt++;
             }
+
+            if (breakEarly) {
+                break;
+            }
+
+            interactionCnt++;
+        }
+
+        if (breakEarly) {
+            break;
         }
     }
 
@@ -80,32 +104,35 @@ function getPValue(coefficients) {
 }
 function getCoefficientArray(dataSets) {
     const coefficients = [];
+    const numberOfCoefficients = dataSets[0].xCount;
 
-    // TODO - make 'discoverable' by the number of x values (i.e. xCount=?)...how make BX inside json Object?
-    coefficients.push(0);
-    coefficients.push(0);
-    //coefficients.push({B2: 0});
-    //coefficients.push({B3: 0});
+    for(let i=0; i<=numberOfCoefficients; i++) {
+        coefficients.push(0);
+    }
 
     return coefficients;
 }
 function makePrediction(coefficients, predictions) {
-    console.log('coefficients: ', coefficients);
+    for(let outer=0; outer<predictions.length; outer++) {
+        const curPrediction = predictions[outer];
+        let predictionLabel = '';
 
-    predictions.forEach((prediction) => {
-        console.log('prediction: ', prediction);
+        let coefficientXValueTotals = 0;
+        for(let inner=1; inner<=curPrediction.xCount; inner++) {
+            const currentX = curPrediction['x' + inner];
 
-        // START HERE - how handle x1, x2, etc.?
-        //const predictedValue = coefficients.B0
-        // + coefficients.B1 * prediction.x1;
-        // + coefficients.B2 * prediction.x2;
-        // + coefficients.B3 * prediction.x3;
+            coefficientXValueTotals += currentX * coefficients[inner];
 
-        const predictedValue = coefficients.B0 + coefficients.B1 * prediction.x;
+            predictionLabel+= currentX + ',';
+        }
 
-        console.log('prediction for ' + prediction.x + ' is ' + predictedValue);
+        predictionLabel = predictionLabel.substring(0, predictionLabel.length-1); //remove last comma
+
+        const predictedValue = coefficients[0] + coefficientXValueTotals;
+
+        console.log('prediction for ' + predictionLabel + ' is ' + predictedValue);
         console.log('');  //formatting
-    });
+    }
 }
 
 module.exports.demoMultipleVariableLinearRegression = demoMultipleVariableLinearRegression;
