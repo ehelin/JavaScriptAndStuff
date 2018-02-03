@@ -39,3 +39,16 @@ app.get('/javascript/languagemechanics/objectfunctions', function (req, res)
 
     res.send('/javascript/languagemechanics/objectfunctions - complete!');
 });
+
+app.get('/javascript/generateRandomNumber', function (req, res)
+{
+    console.log('inside route');
+
+    var guidSource = require('./GuidToNumber/guidToNumber');
+
+    console.log('guidSource: ', guidSource);
+
+    guidSource.generateRandomNumber();
+
+    res.send('/javascript/generateRandomNumber - complete!');
+});
