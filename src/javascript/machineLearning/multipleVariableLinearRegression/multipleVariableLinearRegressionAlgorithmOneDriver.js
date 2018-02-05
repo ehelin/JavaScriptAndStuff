@@ -25,19 +25,31 @@ function linearRegressionCoefficientCalculation(dataSets) {
 
     makePrediction(coefficients, dataSets[1]);
 }
+function getPArray(dataSet) {
+    const p = [];
+    p.push(0);
+
+    for(let i=0; i<dataSet[0].xCount; i++) {
+        p.push(0);
+    }
+
+    return p;
+}
 function calculateSimpleLinearRegressionCoefficients(dataSets) {
     console.log('inside calculateSimpleLinearRegressionCoefficients()');
 
+    const p = getPArray(dataSets);
     let error = 0;   //is error cummulative or 0 for each iteration?
     const alpha = .01;  //aka learning rate
 
     const coefficients = getCoefficientArray(dataSets);
+    console.log('coefficients: ', coefficients);
 
     let interactionCnt = 2;
     let breakEarly = false;
     while(true) {
 
-        if (interactionCnt>200) {
+        if (interactionCnt>20) {
             break;
         }
 
@@ -50,25 +62,23 @@ function calculateSimpleLinearRegressionCoefficients(dataSets) {
             if (outer > 0) {
                 const currentCoefficientTotal = getPValue(coefficients);
 
-                let p = 0;
                 for (let inner = 1; inner <= currentDataset.xCount; inner++) {
                     const currentX = currentDataset['x' + inner];
                     const coefficient = coefficients[inner];
 
-                    console.log('currentX: ', currentX);
-                    console.log(coefficient);
-
-                    p += currentX * coefficient;
+                    p[inner] = currentX * coefficient;
                 }
 
-                p += coefficients[0];
-                console.log('p: ', p);
+                let sumP = 0;
+                for (let inner = 0; inner < p.length; inner++) {
+                    sumP = sumP +  p[inner];
+                }
 
-                error = p - currentDataset.y;
+                sumP += coefficients[0];
+                console.log('sumP: ', sumP);
+
+                error = sumP - currentDataset.y;
                 console.log('error: ', error);
-
-                // breakEarly = true;
-                // break;
 
                 let coefficientXValueTotals = 0;
                 for(let inner=1; inner<=currentDataset.xCount; inner++) {

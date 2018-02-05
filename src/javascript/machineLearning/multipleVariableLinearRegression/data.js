@@ -90,17 +90,17 @@ function getGradientDescentDataSetThree() {
         //predictions
         [
             {x1: 89, x2: 4, x3: 3.84, line: 0, xCount: 3},
-            {x1: 66, x2: 1, x3: 3.19, line: 0, xCount: 3},
-            {x1: 78, x2: 3, x3: 3.78, line: 0, xCount: 3},
-            {x1: 111, x2: 6, x3: 3.89, line: 0, xCount: 3},
-            {x1: 44, x2: 1, x3: 3.57, line: 0, xCount: 3},
-            {x1: 77, x2: 3, x3: 3.57, line: 0, xCount: 3},
-            {x1: 80, x2: 3, x3: 3.03, line: 0, xCount: 3},
-            {x1: 66, x2: 2, x3: 3.51, line: 0, xCount: 3},
-            {x1: 109, x2: 5, x3: 3.54, line: 0, xCount: 3},
-            {x1: 76, x2: 3, x3: 3.25, line: 0, xCount: 3},
-
-            {x1: 81, x2: 7, x3: 5, line: 0, xCount: 3},
+            // {x1: 66, x2: 1, x3: 3.19, line: 0, xCount: 3},
+            // {x1: 78, x2: 3, x3: 3.78, line: 0, xCount: 3},
+            // {x1: 111, x2: 6, x3: 3.89, line: 0, xCount: 3},
+            // {x1: 44, x2: 1, x3: 3.57, line: 0, xCount: 3},
+            // {x1: 77, x2: 3, x3: 3.57, line: 0, xCount: 3},
+            // {x1: 80, x2: 3, x3: 3.03, line: 0, xCount: 3},
+            // {x1: 66, x2: 2, x3: 3.51, line: 0, xCount: 3},
+            // {x1: 109, x2: 5, x3: 3.54, line: 0, xCount: 3},
+            // {x1: 76, x2: 3, x3: 3.25, line: 0, xCount: 3},
+            //
+            // {x1: 81, x2: 7, x3: 5, line: 0, xCount: 3},
         ],
         // //min/max
         // [
