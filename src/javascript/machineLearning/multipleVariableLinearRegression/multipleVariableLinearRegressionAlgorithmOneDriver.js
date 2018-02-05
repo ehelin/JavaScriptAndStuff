@@ -1,27 +1,73 @@
 const dataSetSource = require('./data');
 const ins = require('util');
 
-// Sample data set - http://reliawiki.org/index.php/Multiple_Linear_Regression_Analysis (towards bottom of page)
-// example - http://faculty.cas.usf.edu/mbrannick/regression/Reg2IV.html
+// example reference
+// 1) http://faculty.cas.usf.edu/mbrannick/regression/Reg2IV.html
+// 2) https://www.khanacademy.org/math/probability/data-distributions-a1/summarizing-spread-distributions/a/calculating-standard-deviation-step-by-step
 
-function testProvidedFormula(dataSets) {
-    console.log('inside testProvidedFormula()');
+// Start here - how do you calculate the 521.75 = to the ∑x2 squared
 
-    for(let i=0; i<dataSets.length; i++) {
+// I know...refactor this mess...after it works
+function calculateSumSquare(dataSet) {
+    let total = 0;
+    let x2ValueTotal = 0;
+
+    console.log('inside calculateSumSquare()');
+
+    for(let i=0; i<dataSet.length; i++) {
+        const curDataSetItem = dataSet[i];
+
         if (i>0) {
-            const currentDataSetItem = dataSets[i];
+            let x2Value = Math.pow(curDataSetItem.x1, 2);
+            //let x2Value = curDataSetItem.x2;
+            console.log('x2Value: ', x2Value);
 
-            const height = currentDataSetItem.x1;
-            const age = currentDataSetItem.x2;
+            x2ValueTotal += x2Value;
 
-            const weight = -127.819907444769 + (.240274914264461*height) + (3.09004803935285*age);
-
-            console.log('===========================');
-            console.log('age: ', age);
-            console.log('height: ', height);
-            console.log('weight: ', weight);
+            total += curDataSetItem.x1;
         }
     }
+
+    console.log('x2ValueTotal: ',  x2ValueTotal);
+
+    const recordCount = dataSet.length-1; // -1 for labels
+
+    const mean = total/recordCount;
+
+    let sdTotal = 0;
+    for(let i=0; i<=recordCount; i++) {
+        const curDataSetItem = dataSet[i];
+
+        if (i>0) {
+            //console.log('currentDataSetItem: ', curDataSetItem);
+
+            //total += Math.pow(curDataSetItem.x2, 2);
+            let value = curDataSetItem.x1-mean;
+            value = Math.pow(value, 2);
+            sdTotal += value;
+        }
+    }
+    //console.log('sdTotal: ', sdTotal);
+
+    sdTotal = sdTotal/recordCount;
+    //console.log('sdTotal/recordCount: ', sdTotal);
+
+    const standardDeviation = Math.sqrt(sdTotal);
+
+    console.log('standardDeviation: ', standardDeviation);
+    console.log('mean: ', mean);
+
+    return total;
+}
+
+function multiParameter(dataSets) {
+    console.log('inside multiParameter()');
+
+    let b1 = 0;
+    let b2 = 0;
+
+    const sumX2S = calculateSumSquare(dataSets);
+    console.log('sumX2S: ', sumX2S);
 }
 
 function demoMultipleVariableLinearRegression(dataSetNumber) {
@@ -37,8 +83,7 @@ function demoMultipleVariableLinearRegression(dataSetNumber) {
         linearRegressionCoefficientCalculation(dataSets);
     } else if (dataSetNumber === 3) {
         dataSets = dataSetSource.getGradientDescentDataSetThree();
-        //testProvidedFormula(dataSets[0])
-        linearRegressionCoefficientCalculation(dataSets);
+        multiParameter(dataSets[0]);
     }
 
     return 'inside var demoMultipleVariableLinearRegression - Algorithm 1 - Dataset' + dataSetNumber;
