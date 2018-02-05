@@ -1,7 +1,28 @@
 const dataSetSource = require('./data');
+const ins = require('util');
 
-// TODO - works for first two data sets (simple one parameter linear regression), but not multi parameter
-// Try again with the two parameter data set here - http://reliawiki.org/index.php/Multiple_Linear_Regression_Analysis
+// Sample data set - http://reliawiki.org/index.php/Multiple_Linear_Regression_Analysis (towards bottom of page)
+// example - http://faculty.cas.usf.edu/mbrannick/regression/Reg2IV.html
+
+function testProvidedFormula(dataSets) {
+    console.log('inside testProvidedFormula()');
+
+    for(let i=0; i<dataSets.length; i++) {
+        if (i>0) {
+            const currentDataSetItem = dataSets[i];
+
+            const height = currentDataSetItem.x1;
+            const age = currentDataSetItem.x2;
+
+            const weight = -127.819907444769 + (.240274914264461*height) + (3.09004803935285*age);
+
+            console.log('===========================');
+            console.log('age: ', age);
+            console.log('height: ', height);
+            console.log('weight: ', weight);
+        }
+    }
+}
 
 function demoMultipleVariableLinearRegression(dataSetNumber) {
     console.log('inside var demoMultipleVariableLinearRegression - Algorithm 1 - Dataset' + dataSetNumber);
@@ -10,20 +31,22 @@ function demoMultipleVariableLinearRegression(dataSetNumber) {
 
     if (dataSetNumber === 1) {
         dataSets = dataSetSource.getGradientDescentDataSetOne();
+        linearRegressionCoefficientCalculation(dataSets);
     } else if (dataSetNumber === 2) {
         dataSets = dataSetSource.getGradientDescentDataSetTwo();
+        linearRegressionCoefficientCalculation(dataSets);
     } else if (dataSetNumber === 3) {
         dataSets = dataSetSource.getGradientDescentDataSetThree();
+        //testProvidedFormula(dataSets[0])
+        linearRegressionCoefficientCalculation(dataSets);
     }
-
-    linearRegressionCoefficientCalculation(dataSets);
 
     return 'inside var demoMultipleVariableLinearRegression - Algorithm 1 - Dataset' + dataSetNumber;
 }
 function linearRegressionCoefficientCalculation(dataSets) {
     const coefficients = calculateSimpleLinearRegressionCoefficients(dataSets[0]);
 
-    makePrediction(coefficients, dataSets[1]);
+    //makePrediction(coefficients, dataSets[1]);
 }
 function getPArray(dataSet) {
     const p = [];
@@ -43,13 +66,12 @@ function calculateSimpleLinearRegressionCoefficients(dataSets) {
     const alpha = .01;  //aka learning rate
 
     const coefficients = getCoefficientArray(dataSets);
-    console.log('coefficients: ', coefficients);
 
     let interactionCnt = 2;
     let breakEarly = false;
     while(true) {
 
-        if (interactionCnt>20) {
+        if (interactionCnt>2) {
             break;
         }
 
@@ -75,10 +97,10 @@ function calculateSimpleLinearRegressionCoefficients(dataSets) {
                 }
 
                 sumP += coefficients[0];
-                console.log('sumP: ', sumP);
+                //console.log('sumP: ', sumP);
 
                 error = sumP - currentDataset.y;
-                console.log('error: ', error);
+                //console.log('error: ', error);
 
                 let coefficientXValueTotals = 0;
                 for(let inner=1; inner<=currentDataset.xCount; inner++) {
@@ -91,6 +113,9 @@ function calculateSimpleLinearRegressionCoefficients(dataSets) {
                     }
                 }
             }
+
+            console.log('coefficients: ', coefficients);
+            console.log('p: ', p);
 
             if (breakEarly) {
                 break;
