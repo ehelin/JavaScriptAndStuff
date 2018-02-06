@@ -8,66 +8,69 @@ const ins = require('util');
 // Start here - how do you calculate the 521.75 = to the ∑x2 squared
 
 // I know...refactor this mess...after it works
-function calculateSumSquare(dataSet) {
-    let total = 0;
-    let x2ValueTotal = 0;
-
+function calculateSumSquare(dataSet, isX1) {
     console.log('inside calculateSumSquare()');
+
+    const total = getXTotal(isX1, dataSet);
+    const recordCount = dataSet.length-1; // -1 for labels
+    const mean = total/recordCount;
+    const standardDeviation = getStandardDeviation(recordCount, dataSet, isX1, mean);
+
+    console.log('mean: ', mean);
+    console.log('total: ', total);
+    console.log('standardDeviation: ', standardDeviation);
+
+    return total;
+}
+function getXTotal(isX1, dataSet) {
+    let total = 0;
 
     for(let i=0; i<dataSet.length; i++) {
         const curDataSetItem = dataSet[i];
 
         if (i>0) {
-            let x2Value = Math.pow(curDataSetItem.x1, 2);
-            //let x2Value = curDataSetItem.x2;
-            console.log('x2Value: ', x2Value);
+            let xValue = 0;
 
-            x2ValueTotal += x2Value;
-
-            total += curDataSetItem.x1;
+            if (isX1) {
+                total += curDataSetItem.x1;
+            } else {
+                total += curDataSetItem.x2;
+            }
         }
     }
 
-    console.log('x2ValueTotal: ',  x2ValueTotal);
-
-    const recordCount = dataSet.length-1; // -1 for labels
-
-    const mean = total/recordCount;
-
+    return total;
+}
+function getStandardDeviation(recordCount, dataSet, isX1, mean) {
     let sdTotal = 0;
+
     for(let i=0; i<=recordCount; i++) {
         const curDataSetItem = dataSet[i];
 
         if (i>0) {
-            //console.log('currentDataSetItem: ', curDataSetItem);
+            let value = 0;
 
-            //total += Math.pow(curDataSetItem.x2, 2);
-            let value = curDataSetItem.x1-mean;
+            if (isX1) {
+                value = curDataSetItem.x1-mean;
+            } else {
+                value = curDataSetItem.x2-mean;
+            }
+
             value = Math.pow(value, 2);
             sdTotal += value;
         }
     }
-    //console.log('sdTotal: ', sdTotal);
-
     sdTotal = sdTotal/recordCount;
-    //console.log('sdTotal/recordCount: ', sdTotal);
-
     const standardDeviation = Math.sqrt(sdTotal);
 
-    console.log('standardDeviation: ', standardDeviation);
-    console.log('mean: ', mean);
-
-    return total;
+    return standardDeviation;
 }
 
 function multiParameter(dataSets) {
     console.log('inside multiParameter()');
 
-    let b1 = 0;
-    let b2 = 0;
-
-    const sumX2S = calculateSumSquare(dataSets);
-    console.log('sumX2S: ', sumX2S);
+    const sumX2S = calculateSumSquare(dataSets, true);
+    const sumX2S = calculateSumSquare(dataSets, false);
 }
 
 function demoMultipleVariableLinearRegression(dataSetNumber) {
