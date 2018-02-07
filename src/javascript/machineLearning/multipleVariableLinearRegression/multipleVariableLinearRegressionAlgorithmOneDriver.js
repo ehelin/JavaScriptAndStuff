@@ -10,7 +10,7 @@ const ins = require('util');
 //USS -> Uncorrected Sum of Squares?
 // START here -> https://www.youtube.com/watch?v=W0IR9wF_KFQ
 
-// Start here - how do you calculate the 521.75 = to the ∑x2 squared
+// Start here - recalculate some of the sub numbers...look at formulas further down
 
 // I know...refactor this mess...after it works
 function calculateSumSquare(dataSet, isX1) {
@@ -21,14 +21,22 @@ function calculateSumSquare(dataSet, isX1) {
     const mean = total/recordCount;
     const standardDeviation = getStandardDeviation(recordCount, dataSet, isX1, mean);
     const x2Total = calculateSumOfSquares(dataSet, isX1);  //uss
+    const sumXy = calculateSumXY(dataSet, isX1);
+    const sumX1X2 = calculateSumX1X2(dataSet, false);
+    const sumX1X2Squared = calculateSumX1X2(dataSet, true);
 
-    console.log('mean: ', mean);
-    console.log('total: ', total);
-    console.log('standardDeviation: ', standardDeviation);
+    // console.log('mean: ', mean);
+    // console.log('total: ', total);
+    // console.log('standardDeviation: ', standardDeviation);
     console.log('x2Total: ', x2Total);
+    console.log('sumXy: ', sumXy);
+    console.log('sumX1X2: ', sumX1X2);
+    console.log('sumX1X2Squared: ', sumX1X2Squared);
 
     return total;
 }
+
+// start calculation throw away methods ------------------------
 
 function calculateSumOfSquares(dataSet, isX1) {
     let total = 0;
@@ -74,7 +82,49 @@ function calculateSumOfSquares(dataSet, isX1) {
 
     return squaredTotal;
 }
+function calculateSumXY(dataSet, isX1) {
+    let total = 0;
+    const xValuesSquared = [];
 
+    for(let i=0; i<dataSet.length; i++) {
+        const curDataSetItem = dataSet[i];
+
+        if (i>0) {
+            let xValue = 0;
+
+            if (isX1) {
+                xValue = curDataSetItem.x1;
+            } else {
+                xValue = curDataSetItem.x2;
+            }
+
+            xValue = xValue * curDataSetItem.y;
+
+            total += xValue;
+        }
+    }
+
+    return total;
+}
+function calculateSumX1X2(dataSet, squareNumbers) {
+    let total = 0;
+    const xValuesSquared = [];
+
+    for(let i=0; i<dataSet.length; i++) {
+        const curDataSetItem = dataSet[i];
+
+        if (i>0) {
+            let xValue = curDataSetItem.x1 * curDataSetItem.x2;;
+            total += xValue;
+        }
+    }
+
+    if (squareNumbers){
+        total = Math.pow(total, 2);
+    }
+
+    return total;
+}
 function getXTotal(isX1, dataSet) {
     let total = 0;
 
@@ -118,18 +168,21 @@ function getStandardDeviation(recordCount, dataSet, isX1, mean) {
 
     return standardDeviation;
 }
-
 function multiParameter(dataSets) {
     console.log('inside multiParameter()');
 
+    console.log('x1 -------------------------------------');
     calculateSumSquare(dataSets, true);
 
     console.log('');
     console.log('========================================');
     console.log('');
 
+    console.log('x2 -------------------------------------');
     calculateSumSquare(dataSets, false);
 }
+
+// end calculation throw away methods ------------------------
 
 function demoMultipleVariableLinearRegression(dataSetNumber) {
     console.log('inside var demoMultipleVariableLinearRegression - Algorithm 1 - Dataset' + dataSetNumber);
