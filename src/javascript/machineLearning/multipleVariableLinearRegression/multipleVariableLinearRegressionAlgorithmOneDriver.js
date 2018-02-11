@@ -40,6 +40,9 @@ function calculateNeededValues(dataSet) {
     const b2 = ((sumX1Squared*sumX2Y)-(sumX1X2*sumX1y))/((sumX1Squared*sumX2Squared)-(param4));
     console.log('b2: ', b2);
 
+    // Y intercept
+    const a = //start here!!!!!!!!
+
 }
 function calculateSumX2Y(dataSet) {
     let total = 0;
