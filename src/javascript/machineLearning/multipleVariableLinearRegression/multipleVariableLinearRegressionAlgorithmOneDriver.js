@@ -1,16 +1,63 @@
 const dataSetSource = require('./data');
 const ins = require('util');
 
-// example reference
-// 1) http://faculty.cas.usf.edu/mbrannick/regression/Reg2IV.html
-// 2) https://www.khanacademy.org/math/probability/data-distributions-a1/summarizing-spread-distributions/a/calculating-standard-deviation-step-by-step
-// 3) https://www.youtube.com/watch?v=W0IR9wF_KFQ
-// 4) https://www.thoughtco.com/sum-of-squares-formula-shortcut-3126266 (found out how to calculate the sum of squares correctly here!!!)
-// 5) http://cf.linnbenton.edu/mathsci/math/maurerv/upload/7.1%20Lecture%20Notes.pdf
+function demoMultipleVariableLinearRegression(dataSetNumber) {
+    console.log('inside var demoMultipleVariableLinearRegression - Algorithm 1 - Dataset' + dataSetNumber);
 
-// Start here - calculate ryx1 (reference #5) (get all of the numbers calculated inside the matrix)
+    var dataSets = null;
 
-// I know...refactor this mess...after it works
+    if (dataSetNumber === 1) {
+        dataSets = dataSetSource.getGradientDescentDataSetOne();
+        singleParameter(dataSets[0]);
+        //dataSets = dataSetSource.getGradientDescentDataSetOne();
+        //linearRegressionCoefficientCalculation(dataSets);
+    } else if (dataSetNumber === 2) {
+        //dataSets = dataSetSource.getGradientDescentDataSetTwo();
+        //linearRegressionCoefficientCalculation(dataSets);
+    } else if (dataSetNumber === 3) {
+        dataSets = dataSetSource.getGradientDescentDataSetThree();
+        multiParameter(dataSets[0]);
+    }
+
+    return 'inside var demoMultipleVariableLinearRegression - Algorithm 1 - Dataset' + dataSetNumber;
+}
+// start 1 parameter linear regression
+function singleParameter(dataSet) {
+    console.log('inside singleParameter()');
+
+    const sumX1y = calculateSumXY(dataSet, true);  //modify to handle one parameter
+    const sumX2Squared = calculateSumOfSquares(dataSet, true, false);  //uss
+
+    console.log('sumX1y: ', sumX1y);
+    console.log('sumX2Squared: ', sumX2Squared);
+
+    const b1 = sumX1y/sumX2Squared;
+    const yMean = calculateMean(dataSet, false, true);
+    const x1Mean = calculateMean(dataSet, true, false);
+
+    console.log('yMean: ', yMean);
+    console.log('x1Mean: ', x1Mean);
+
+    const a = yMean - b1 * x1Mean;
+
+    for(let i=0; i<dataSet.length; i++) {
+        const curDataSet = dataSet[i];
+
+        if (i>0) {
+            const predictedYValue = a + b1 * curDataSet.x1;
+            console.log('currentDataSet: ', curDataSet);
+            console.log('predictedYValue: ', predictedYValue);
+        }
+    }
+}
+// end 2 parameter linear regression
+
+// start 2 parameter linear regression
+function multiParameter(dataSets) {
+    console.log('inside multiParameter()');
+
+    calculateNeededValues(dataSets);
+}
 function calculateNeededValues(dataSet) {
     console.log('inside calculateSumSquare()');
 
@@ -53,7 +100,6 @@ function calculateNeededValues(dataSet) {
 
     testPredictionFormula(yMean, b1, x1Mean, b2, x2Mean, dataSet, a);
 }
-
 function testPredictionFormula(yMean, b1, x1Mean, b2, x2Mean, dataSet, a) {
     for(let i=0; i<dataSet.length; i++) {
         const curDataSet = dataSet[i];
@@ -65,7 +111,6 @@ function testPredictionFormula(yMean, b1, x1Mean, b2, x2Mean, dataSet, a) {
         }
     }
 }
-
 function calculateSumX2Y(dataSet) {
     let total = 0;
     let sumY = 0;
@@ -112,9 +157,6 @@ function calculateSumX1X2(dataSet) {
 
     return finalTotal;
 }
-
-// start calculation throw away methods ------------------------
-
 function getRecordCount(dataSet) {
     const recordCount = dataSet.length-1;  // -1 for labels
 
@@ -177,7 +219,6 @@ function calculateFinalStandardDeviation(valueTotalMinusmean, dataSet) {
 
     return valueTotalMinusmean;
 }
-
 function calculateSumOfSquares(dataSet, isX1, isY) {
     let total = 0;
     const xValuesSquared = [];
@@ -227,6 +268,8 @@ function calculateSumOfSquares(dataSet, isX1, isY) {
     return squaredTotal;
 }
 function calculateSumXY(dataSet, isX1) {
+    console.log('inside calculateSumXY()');
+
     let total = 0;
     let sumX = 0;
     let sumY = 0;
@@ -234,6 +277,8 @@ function calculateSumXY(dataSet, isX1) {
 
     for(let i=0; i<dataSet.length; i++) {
         const curDataSetItem = dataSet[i];
+
+        console.log('curDataSetItem: ', curDataSetItem);
 
         if (i>0) {
             let xValue = 0;
@@ -252,6 +297,8 @@ function calculateSumXY(dataSet, isX1) {
             total += xValue;
         }
     }
+
+
 
     const finalTotal = total - ((sumX * sumY)/recordCount);
 
@@ -299,42 +346,6 @@ function getStandardDeviation(recordCount, dataSet, isX1, mean) {
     const standardDeviation = Math.sqrt(sdTotal);
 
     return standardDeviation;
-}
-function multiParameter(dataSets) {
-    console.log('inside multiParameter()');
-
-    calculateNeededValues(dataSets);
-
-    // console.log('x1 -------------------------------------');
-    // calculateSumSquare(dataSets, true);
-    //
-    // console.log('');
-    // console.log('========================================');
-    // console.log('');
-    //
-    // console.log('x2 -------------------------------------');
-    // calculateSumSquare(dataSets, false);
-}
-
-// end calculation throw away methods ------------------------
-
-function demoMultipleVariableLinearRegression(dataSetNumber) {
-    console.log('inside var demoMultipleVariableLinearRegression - Algorithm 1 - Dataset' + dataSetNumber);
-
-    var dataSets = null;
-
-    if (dataSetNumber === 1) {
-        dataSets = dataSetSource.getGradientDescentDataSetOne();
-        linearRegressionCoefficientCalculation(dataSets);
-    } else if (dataSetNumber === 2) {
-        dataSets = dataSetSource.getGradientDescentDataSetTwo();
-        linearRegressionCoefficientCalculation(dataSets);
-    } else if (dataSetNumber === 3) {
-        dataSets = dataSetSource.getGradientDescentDataSetThree();
-        multiParameter(dataSets[0]);
-    }
-
-    return 'inside var demoMultipleVariableLinearRegression - Algorithm 1 - Dataset' + dataSetNumber;
 }
 function linearRegressionCoefficientCalculation(dataSets) {
     const coefficients = calculateSimpleLinearRegressionCoefficients(dataSets[0]);
@@ -465,5 +476,6 @@ function makePrediction(coefficients, predictions) {
         console.log('');  //formatting
     }
 }
+// end 2 parameter linear regression
 
 module.exports.demoMultipleVariableLinearRegression = demoMultipleVariableLinearRegression;
