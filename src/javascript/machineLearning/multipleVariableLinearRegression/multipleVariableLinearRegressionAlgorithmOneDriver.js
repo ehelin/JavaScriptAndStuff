@@ -40,10 +40,32 @@ function calculateNeededValues(dataSet) {
     const b2 = ((sumX1Squared*sumX2Y)-(sumX1X2*sumX1y))/((sumX1Squared*sumX2Squared)-(param4));
     console.log('b2: ', b2);
 
-    // Y intercept
-    const a = //start here!!!!!!!!
+    const yMean = calculateMean(dataSet, false, true);
+    const x1Mean = calculateMean(dataSet, true, false);
+    const x2Mean = calculateMean(dataSet, false, false);
 
+    console.log('yMean: ', yMean);
+    console.log('x1Mean: ', x1Mean);
+    console.log('x2Mean: ', x2Mean);
+
+    const a = yMean - b1 * x1Mean - b2 * x2Mean;
+    console.log('a: ', a);
+
+    testPredictionFormula(yMean, b1, x1Mean, b2, x2Mean, dataSet, a);
 }
+
+function testPredictionFormula(yMean, b1, x1Mean, b2, x2Mean, dataSet, a) {
+    for(let i=0; i<dataSet.length; i++) {
+        const curDataSet = dataSet[i];
+
+        if (i>0) {
+            const predictedYValue = a + b1 * curDataSet.x1 + b2 * curDataSet.x2;
+            console.log('currentDataSet: ', curDataSet);
+            console.log('predictedYValue: ', predictedYValue);
+        }
+    }
+}
+
 function calculateSumX2Y(dataSet) {
     let total = 0;
     let sumY = 0;
