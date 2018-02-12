@@ -4,40 +4,25 @@ const ins = require('util');
 function demoMultipleVariableLinearRegression(dataSetNumber) {
     console.log('inside var demoMultipleVariableLinearRegression - Algorithm 1 - Dataset' + dataSetNumber);
 
-    var dataSets = null;
-
     if (dataSetNumber === 1) {
-        dataSets = dataSetSource.getGradientDescentDataSetOne();
-        singleParameter(dataSets[0]);
-        //dataSets = dataSetSource.getGradientDescentDataSetOne();
-        //linearRegressionCoefficientCalculation(dataSets);
+        singleParameter(dataSetSource.getGradientDescentDataSetOne()[0]);
     } else if (dataSetNumber === 2) {
-        //dataSets = dataSetSource.getGradientDescentDataSetTwo();
-        //linearRegressionCoefficientCalculation(dataSets);
+        singleParameter(dataSetSource.getGradientDescentDataSetTwo()[0]);
     } else if (dataSetNumber === 3) {
-        dataSets = dataSetSource.getGradientDescentDataSetThree();
-        multiParameter(dataSets[0]);
+        multiParameter( dataSetSource.getGradientDescentDataSetThree()[0]);
     }
 
     return 'inside var demoMultipleVariableLinearRegression - Algorithm 1 - Dataset' + dataSetNumber;
 }
-// start 1 parameter linear regression
+
 function singleParameter(dataSet) {
     console.log('inside singleParameter()');
 
     const sumX1y = calculateSumXY(dataSet, true);  //modify to handle one parameter
     const sumX2Squared = calculateSumOfSquares(dataSet, true, false);  //uss
-
-    console.log('sumX1y: ', sumX1y);
-    console.log('sumX2Squared: ', sumX2Squared);
-
     const b1 = sumX1y/sumX2Squared;
     const yMean = calculateMean(dataSet, false, true);
     const x1Mean = calculateMean(dataSet, true, false);
-
-    console.log('yMean: ', yMean);
-    console.log('x1Mean: ', x1Mean);
-
     const a = yMean - b1 * x1Mean;
 
     for(let i=0; i<dataSet.length; i++) {
@@ -50,57 +35,22 @@ function singleParameter(dataSet) {
         }
     }
 }
-// end 2 parameter linear regression
-
-// start 2 parameter linear regression
-function multiParameter(dataSets) {
+function multiParameter(dataSet) {
     console.log('inside multiParameter()');
-
-    calculateNeededValues(dataSets);
-}
-function calculateNeededValues(dataSet) {
-    console.log('inside calculateSumSquare()');
 
     const sumX2Squared = calculateSumOfSquares(dataSet, false, false);  //uss
     const sumX1y = calculateSumXY(dataSet, true);
     const sumX1X2 = calculateSumX1X2(dataSet);
     const sumX2Y = calculateSumX2Y(dataSet);
     const sumX1Squared = calculateSumOfSquares(dataSet, true, false); //uss
-
-    console.log('sumX2Squared: ', sumX2Squared);
-    console.log('sumX1y: ', sumX1y);
-    console.log('sumX1X2: ', sumX1X2);
-    console.log('sumX2Y: ', sumX2Y);
-    console.log('sumX1Squared: ', sumX1Squared);
-    console.log('sumX2Squared: ', sumX2Squared);
-    console.log('sumX1X2: ', sumX1X2);
-    console.log('sumX1X2: ', sumX1X2);
-
-    const param1 = sumX2Squared*sumX1y;
-    const param2 = sumX1X2*sumX2Y;
-    const param3 = sumX1Squared*sumX2Squared;
-    const param4 = Math.pow(sumX1X2, 2);
-
-    const b1 = (param1 - param2)/(param3-param4);
-    console.log('b1: ', b1);
-
-    const b2 = ((sumX1Squared*sumX2Y)-(sumX1X2*sumX1y))/((sumX1Squared*sumX2Squared)-(param4));
-    console.log('b2: ', b2);
-
     const yMean = calculateMean(dataSet, false, true);
     const x1Mean = calculateMean(dataSet, true, false);
     const x2Mean = calculateMean(dataSet, false, false);
 
-    console.log('yMean: ', yMean);
-    console.log('x1Mean: ', x1Mean);
-    console.log('x2Mean: ', x2Mean);
-
+    const b1 = ((sumX2Squared*sumX1y) - (sumX1X2*sumX2Y))/((sumX1Squared*sumX2Squared)-Math.pow(sumX1X2, 2));
+    const b2 = ((sumX1Squared*sumX2Y)-(sumX1X2*sumX1y))/((sumX1Squared*sumX2Squared)-Math.pow(sumX1X2, 2));
     const a = yMean - b1 * x1Mean - b2 * x2Mean;
-    console.log('a: ', a);
 
-    testPredictionFormula(yMean, b1, x1Mean, b2, x2Mean, dataSet, a);
-}
-function testPredictionFormula(yMean, b1, x1Mean, b2, x2Mean, dataSet, a) {
     for(let i=0; i<dataSet.length; i++) {
         const curDataSet = dataSet[i];
 
@@ -111,162 +61,8 @@ function testPredictionFormula(yMean, b1, x1Mean, b2, x2Mean, dataSet, a) {
         }
     }
 }
-function calculateSumX2Y(dataSet) {
-    let total = 0;
-    let sumY = 0;
-    let sumX2 = 0;
-    const recordCount = getRecordCount(dataSet);
 
-    for(let i=0; i<dataSet.length; i++) {
-        const curDataSetItem = dataSet[i];
-
-        if (i>0) {
-            sumY += curDataSetItem.y;
-            sumX2 += curDataSetItem.x2;
-
-            let value = curDataSetItem.y * curDataSetItem.x2;
-
-            total += value;
-        }
-    }
-
-    const finalTotal = total - ((sumY * sumX2)/recordCount);
-
-    return finalTotal;
-}
-function calculateSumX1X2(dataSet) {
-    let total = 0;
-    let sumX1 = 0;
-    let sumX2 = 0;
-    const recordCount = getRecordCount(dataSet);
-
-    for(let i=0; i<dataSet.length; i++) {
-        const curDataSetItem = dataSet[i];
-
-        if (i>0) {
-            sumX1 += curDataSetItem.x1;
-            sumX2 += curDataSetItem.x2;
-
-            let value = curDataSetItem.x1 * curDataSetItem.x2;
-
-            total += value;
-        }
-    }
-
-    const finalTotal = total - ((sumX1 * sumX2)/recordCount);
-
-    return finalTotal;
-}
-function getRecordCount(dataSet) {
-    const recordCount = dataSet.length-1;  // -1 for labels
-
-    return recordCount;
-}
-function prepareNumbers(value, useMean, mean) {
-    let preparedNumber = 0;
-
-    if (useMean) {
-        preparedNumber = Math.abs(value-mean);
-    } else {
-        preparedNumber = value;
-    }
-
-    return preparedNumber;
-}
-function calculateTotal(dataSet, isX1, isY, mean, useMean) {
-    let total = 0;
-
-    for(let i=0; i<dataSet.length; i++) {
-        const curDataSetItem = dataSet[i];
-
-        if (i>0) {
-            let value = 0;
-
-            if (isX1) {
-                value = prepareNumbers(curDataSetItem.x1, useMean, mean);
-            } else if (isY) {
-                value = prepareNumbers(curDataSetItem.y, useMean, mean);
-                value = curDataSetItem.y;
-            } else {
-                value = prepareNumbers(curDataSetItem.x2, useMean, mean);
-            }
-
-            total += value;
-        }
-    }
-
-    return total;
-}
-function calculateMean(dataSet, isX1, isY) {
-    console.log('inside calculateMean()');
-
-    const total = calculateTotal(dataSet, isX1, isY, 0, false);
-    const recordCount = getRecordCount(dataSet);
-    const mean = total/recordCount;
-
-    // console.log('total: ', total);
-    // console.log('recordCount: ', recordCount);
-    // console.log('mean: ', mean);
-
-    return mean;
-}
-function calculateFinalStandardDeviation(valueTotalMinusmean, dataSet) {
-    const recordCount = getRecordCount(dataSet);
-
-    valueTotalMinusmean = Math.pow(valueTotalMinusmean, 2);
-    valueTotalMinusmean = valueTotalMinusmean/recordCount;
-    valueTotalMinusmean = Math.sqrt(valueTotalMinusmean);
-
-    return valueTotalMinusmean;
-}
-function calculateSumOfSquares(dataSet, isX1, isY) {
-    let total = 0;
-    const xValuesSquared = [];
-
-    for(let i=0; i<dataSet.length; i++) {
-        const curDataSetItem = dataSet[i];
-
-        if (i>0) {
-            let value;
-
-            if (isX1) {
-               value = curDataSetItem.x1;
-            } else if (isY) {
-                value = curDataSetItem.y;
-            } else {
-                value = curDataSetItem.x2
-            }
-
-            total += value;
-        }
-    }
-
-    const n = dataSet.length-1;
-    const mean = total/n;
-
-    let squaredTotal = 0;
-    for(let i=0; i<dataSet.length; i++) {
-        const curDataSetItem = dataSet[i];
-
-        if (i>0) {
-            let value = 0;
-
-            if (isX1) {
-                value = curDataSetItem.x1;
-            } else if (isY) {
-                value = curDataSetItem.y;
-            } else {
-                value = curDataSetItem.x2
-            }
-
-            value = value - mean;
-            value = Math.pow(value, 2);
-            squaredTotal += value;
-        }
-    }
-
-    return squaredTotal;
-}
+// used in both single and two parameter linear regression
 function calculateSumXY(dataSet, isX1) {
     console.log('inside calculateSumXY()');
 
@@ -304,178 +100,150 @@ function calculateSumXY(dataSet, isX1) {
 
     return finalTotal;
 }
-function getXTotal(isX1, dataSet) {
+function calculateSumOfSquares(dataSet, isX1, isY) {
     let total = 0;
+    const xValuesSquared = [];
 
     for(let i=0; i<dataSet.length; i++) {
         const curDataSetItem = dataSet[i];
 
         if (i>0) {
-            let xValue = 0;
+            let value;
 
             if (isX1) {
-                total += curDataSetItem.x1;
+                value = curDataSetItem.x1;
+            } else if (isY) {
+                value = curDataSetItem.y;
             } else {
-                total += curDataSetItem.x2;
+                value = curDataSetItem.x2
             }
+
+            total += value;
         }
     }
 
-    return total;
-}
-function getStandardDeviation(recordCount, dataSet, isX1, mean) {
-    let sdTotal = 0;
+    const n = dataSet.length-1;
+    const mean = total/n;
 
-    for(let i=0; i<=recordCount; i++) {
+    let squaredTotal = 0;
+    for(let i=0; i<dataSet.length; i++) {
         const curDataSetItem = dataSet[i];
 
         if (i>0) {
             let value = 0;
 
             if (isX1) {
-                value = curDataSetItem.x1-mean;
+                value = curDataSetItem.x1;
+            } else if (isY) {
+                value = curDataSetItem.y;
             } else {
-                value = curDataSetItem.x2-mean;
+                value = curDataSetItem.x2
             }
 
+            value = value - mean;
             value = Math.pow(value, 2);
-            sdTotal += value;
+            squaredTotal += value;
         }
     }
-    sdTotal = sdTotal/recordCount;
-    const standardDeviation = Math.sqrt(sdTotal);
 
-    return standardDeviation;
+    return squaredTotal;
 }
-function linearRegressionCoefficientCalculation(dataSets) {
-    const coefficients = calculateSimpleLinearRegressionCoefficients(dataSets[0]);
+function calculateMean(dataSet, isX1, isY) {
+    console.log('inside calculateMean()');
 
-    //makePrediction(coefficients, dataSets[1]);
+    const total = calculateTotal(dataSet, isX1, isY, 0, false);
+    const recordCount = getRecordCount(dataSet);
+    const mean = total/recordCount;
+
+    return mean;
 }
-function getPArray(dataSet) {
-    const p = [];
-    p.push(0);
 
-    for(let i=0; i<dataSet[0].xCount; i++) {
-        p.push(0);
+// used in two parameter linear regression
+function calculateSumX1X2(dataSet) {
+    let total = 0;
+    let sumX1 = 0;
+    let sumX2 = 0;
+    const recordCount = getRecordCount(dataSet);
+
+    for(let i=0; i<dataSet.length; i++) {
+        const curDataSetItem = dataSet[i];
+
+        if (i>0) {
+            sumX1 += curDataSetItem.x1;
+            sumX2 += curDataSetItem.x2;
+
+            let value = curDataSetItem.x1 * curDataSetItem.x2;
+
+            total += value;
+        }
     }
 
-    return p;
+    const finalTotal = total - ((sumX1 * sumX2)/recordCount);
+
+    return finalTotal;
 }
-function calculateSimpleLinearRegressionCoefficients(dataSets) {
-    console.log('inside calculateSimpleLinearRegressionCoefficients()');
+function calculateSumX2Y(dataSet) {
+    let total = 0;
+    let sumY = 0;
+    let sumX2 = 0;
+    const recordCount = getRecordCount(dataSet);
 
-    const p = getPArray(dataSets);
-    let error = 0;   //is error cummulative or 0 for each iteration?
-    const alpha = .01;  //aka learning rate
+    for(let i=0; i<dataSet.length; i++) {
+        const curDataSetItem = dataSet[i];
 
-    const coefficients = getCoefficientArray(dataSets);
+        if (i>0) {
+            sumY += curDataSetItem.y;
+            sumX2 += curDataSetItem.x2;
 
-    let interactionCnt = 2;
-    let breakEarly = false;
-    while(true) {
+            let value = curDataSetItem.y * curDataSetItem.x2;
 
-        if (interactionCnt>2) {
-            break;
+            total += value;
         }
+    }
 
-        for(let outer=0; outer<dataSets.length; outer++) {
-            const currentDataset = dataSets[outer];
+    const finalTotal = total - ((sumY * sumX2)/recordCount);
 
-            console.log('currentDataSet: ', currentDataset);
+    return finalTotal;
+}
+function getRecordCount(dataSet) {
+    const recordCount = dataSet.length-1;  // -1 for labels
 
-            //skip first row which are labels
-            if (outer > 0) {
-                const currentCoefficientTotal = getPValue(coefficients);
+    return recordCount;
+}
+function calculateTotal(dataSet, isX1, isY, mean, useMean) {
+    let total = 0;
 
-                for (let inner = 1; inner <= currentDataset.xCount; inner++) {
-                    const currentX = currentDataset['x' + inner];
-                    const coefficient = coefficients[inner];
+    for(let i=0; i<dataSet.length; i++) {
+        const curDataSetItem = dataSet[i];
 
-                    p[inner] = currentX * coefficient;
-                }
+        if (i>0) {
+            let value = 0;
 
-                let sumP = 0;
-                for (let inner = 0; inner < p.length; inner++) {
-                    sumP = sumP +  p[inner];
-                }
-
-                sumP += coefficients[0];
-                //console.log('sumP: ', sumP);
-
-                error = sumP - currentDataset.y;
-                //console.log('error: ', error);
-
-                let coefficientXValueTotals = 0;
-                for(let inner=1; inner<=currentDataset.xCount; inner++) {
-                    const currentX = currentDataset['x' + inner];
-
-                    if (inner === 0) {
-                        coefficients[inner] = coefficients[inner] - alpha * error;
-                    } else {
-                        coefficients[inner] = coefficients[inner] - alpha * error * currentX;
-                    }
-                }
+            if (isX1) {
+                value = prepareNumbers(curDataSetItem.x1, useMean, mean);
+            } else if (isY) {
+                value = prepareNumbers(curDataSetItem.y, useMean, mean);
+                value = curDataSetItem.y;
+            } else {
+                value = prepareNumbers(curDataSetItem.x2, useMean, mean);
             }
 
-            console.log('coefficients: ', coefficients);
-            console.log('p: ', p);
-
-            if (breakEarly) {
-                break;
-            }
-
-            interactionCnt++;
-        }
-
-        if (breakEarly) {
-            break;
+            total += value;
         }
     }
 
-    return coefficients;
+    return total;
 }
-function getPValue(coefficients) {
-    let curCoefficientTotal = 0;
+function prepareNumbers(value, useMean, mean) {
+    let preparedNumber = 0;
 
-    for(let pValCtr=0; pValCtr<coefficients.length; pValCtr++) {
-        curCoefficientTotal += coefficients[pValCtr]
+    if (useMean) {
+        preparedNumber = Math.abs(value-mean);
+    } else {
+        preparedNumber = value;
     }
 
-    return curCoefficientTotal;
+    return preparedNumber;
 }
-function getCoefficientArray(dataSets) {
-    const coefficients = [];
-    const numberOfCoefficients = dataSets[0].xCount;
-
-    for(let i=0; i<=numberOfCoefficients; i++) {
-        coefficients.push(0);
-    }
-
-    return coefficients;
-}
-function makePrediction(coefficients, predictions) {
-    for(let outer=0; outer<predictions.length; outer++) {
-        const curPrediction = predictions[outer];
-        let predictionLabel = '';
-
-        let coefficientXValueTotals = 0;
-        for(let inner=1; inner<=curPrediction.xCount; inner++) {
-            const currentX = curPrediction['x' + inner];
-
-            coefficientXValueTotals += currentX * coefficients[inner];
-
-            predictionLabel+= currentX + ',';
-        }
-
-        predictionLabel = predictionLabel.substring(0, predictionLabel.length-1); //remove last comma
-
-        const predictedValue = coefficients[0] + coefficientXValueTotals;
-
-        console.log('prediction for ' + predictionLabel + ' is ' + predictedValue);
-        console.log('');  //formatting
-    }
-}
-// end 2 parameter linear regression
 
 module.exports.demoMultipleVariableLinearRegression = demoMultipleVariableLinearRegression;
