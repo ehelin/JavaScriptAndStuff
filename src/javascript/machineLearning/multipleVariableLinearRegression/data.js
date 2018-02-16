@@ -15,22 +15,10 @@ function getGradientDescentDataSetOne() {
             {x1: 3, y: 0, xCount: 1},
             {x1: 4, y: 0, xCount: 1},
             {x1: 5, y: 0, xCount: 1},
+
             {x1: 6, y: 0, xCount: 1},
             {x1: 7, y: 0, xCount: 1},
         ],
-        // //min/max
-        // [
-        //     {minX: 0, maxX: 7, minY: 0, maxY: 7}
-        // ],
-        // //cost function
-        // [
-        //     {x: 'x', y: 'y', line: 'line'},
-        //     {x: 0,y: 0, line: 0},
-        //     {x: 0,y: 0, line: 0},
-        //     {x: 0,y: 0, line: 0},
-        //     {x: 0,y: 0, line: 0},
-        //     {x: 0,y: 0, line: 0},
-        // ],
     ];
 
     return dataSets;
@@ -52,22 +40,10 @@ function getGradientDescentDataSetTwo() {
             {x1: 3, y: 0, xCount: 1},
             {x1: 4, y: 0, xCount: 1},
             {x1: 5, y: 0, xCount: 1},
+
             {x1: 6, y: 0, xCount: 1},
             {x1: 7, y: 0, xCount: 1},
         ],
-        // //min/max
-        // [
-        //     {minX: 0, maxX: 7, minY: 0, maxY: 7}
-        // ],
-        // //cost function
-        // [
-        //     {x: 'x', y: 'y', line: 'line'},
-        //     {x: 0,y: 0, line: 0},
-        //     {x: 0,y: 0, line: 0},
-        //     {x: 0,y: 0, line: 0},
-        //     {x: 0,y: 0, line: 0},
-        //     {x: 0,y: 0, line: 0},
-        // ],
     ];
 
     return dataSets;
@@ -120,20 +96,10 @@ function getGradientDescentDataSetThree() {
             {x1: 65, x2: 38, y: 5, line: 0, xCount: 2},
             {x1: 50, x2: 34, y: 4, line: 0, xCount: 2},
             {x1: 58, x2: 38, y: 3, line: 0, xCount: 2},
+
+            {x1: 500, x2: 299, y: 3, line: 0, xCount: 2},
+            {x1: 2, x2: 100, y: 3, line: 0, xCount: 2},
         ],
-        // //min/max
-        // [
-        //     {minX: 0, maxX: 7, minY: 0, maxY: 7}
-        // ],
-        // //cost function
-        // [
-        //     {x: 'x', y: 'y', line: 'line'},
-        //     {x: 0,y: 0, line: 0},
-        //     {x: 0,y: 0, line: 0},
-        //     {x: 0,y: 0, line: 0},
-        //     {x: 0,y: 0, line: 0},
-        //     {x: 0,y: 0, line: 0},
-        // ],
     ];
 
     return dataSets;
