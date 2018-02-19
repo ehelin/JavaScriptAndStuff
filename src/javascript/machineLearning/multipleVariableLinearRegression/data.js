@@ -16,6 +16,7 @@ function getGradientDescentDataSetOne() {
             {x1: 4, y: 0, xCount: 1},
             {x1: 5, y: 0, xCount: 1},
 
+            // new predictions not in test set
             {x1: 6, y: 0, xCount: 1},
             {x1: 7, y: 0, xCount: 1},
         ],
@@ -41,6 +42,7 @@ function getGradientDescentDataSetTwo() {
             {x1: 4, y: 0, xCount: 1},
             {x1: 5, y: 0, xCount: 1},
 
+            // new predictions not in test set
             {x1: 6, y: 0, xCount: 1},
             {x1: 7, y: 0, xCount: 1},
         ],
@@ -97,6 +99,7 @@ function getGradientDescentDataSetThree() {
             {x1: 50, x2: 34, y: 4, line: 0, xCount: 2},
             {x1: 58, x2: 38, y: 3, line: 0, xCount: 2},
 
+            // new predictions not in test set
             {x1: 500, x2: 299, y: 3, line: 0, xCount: 2},
             {x1: 2, x2: 100, y: 3, line: 0, xCount: 2},
         ],
