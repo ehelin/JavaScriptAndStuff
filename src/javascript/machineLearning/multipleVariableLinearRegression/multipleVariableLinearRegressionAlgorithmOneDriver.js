@@ -10,6 +10,8 @@ function demoMultipleVariableLinearRegression(dataSetNumber) {
         singleParameter(dataSetSource.getGradientDescentDataSetTwo());
     } else if (dataSetNumber === 3) {
         multiParameter( dataSetSource.getGradientDescentDataSetThree());
+    } else if (dataSetNumber === 4) {
+        multiParameter( dataSetSource.getGradientDescentDataSetFour());
     }
 
     return 'inside var demoMultipleVariableLinearRegression - Algorithm 1 - Dataset' + dataSetNumber;
