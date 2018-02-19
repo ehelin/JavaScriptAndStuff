@@ -48,12 +48,16 @@ function multiParameter(dataSet) {
     const b2 = ((sumX1Squared*sumX2Y)-(sumX1X2*sumX1y))/((sumX1Squared*sumX2Squared)-Math.pow(sumX1X2, 2));
     const a = yMean - b1 * x1Mean - b2 * x2Mean;
 
+    console.log('b1: ', b1);
+    console.log('b2: ', b2);
+
     const dataSetForPredictions = dataSet[1];
     for(let i=0; i<dataSetForPredictions.length; i++) {
         const curDataSet = dataSetForPredictions[i];
 
-        if (i>0) {
+        if (i>0 && curDataSet.xCount === -1) {
             const predictedYValue = a + b1 * curDataSet.x1 + b2 * curDataSet.x2;
+
             console.log('currentDataSet: ', curDataSet);
             console.log('predictedYValue: ', predictedYValue);
         }
@@ -62,8 +66,6 @@ function multiParameter(dataSet) {
 
 // used in both single and two parameter linear regression
 function calculateSumXY(dataSet, isX1) {
-    console.log('inside calculateSumXY()');
-
     let total = 0;
     let sumX = 0;
     let sumY = 0;
@@ -71,8 +73,6 @@ function calculateSumXY(dataSet, isX1) {
 
     for(let i=0; i<dataSet.length; i++) {
         const curDataSetItem = dataSet[i];
-
-        console.log('curDataSetItem: ', curDataSetItem);
 
         if (i>0) {
             let xValue = 0;
@@ -91,8 +91,6 @@ function calculateSumXY(dataSet, isX1) {
             total += xValue;
         }
     }
-
-
 
     const finalTotal = total - ((sumX * sumY)/recordCount);
 
