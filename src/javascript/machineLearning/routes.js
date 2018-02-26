@@ -135,4 +135,11 @@ app.get('/javascript/machineLearning/multipleVariableLinearRegressionAlgorithmOn
 
     res.send(result);
 });
+app.get('/javascript/machineLearning/multipleVariableLinearRegressionAlgorithmOne/dataSetFive', function(req, res) {
+    var ref = require('./multipleVariableLinearRegression/multipleVariableLinearRegressionAlgorithmOneDriver');
+
+    var result = ref.demoMultipleVariableLinearRegression(5);
+
+    res.send(result);
+});
 
