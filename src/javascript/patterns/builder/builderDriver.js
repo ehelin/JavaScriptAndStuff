@@ -1,5 +1,6 @@
 var cbRef = require('./ConcreteBuilder');
 
+//This pattern builds a complex object with specific parts that follow an order or algorithm - build 'parts' and then they can be retrieved as one object
 function demoBuilderPattern() {
     console.log('inside demoBuilderPattern');
 

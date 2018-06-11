@@ -1,5 +1,6 @@
 var ref = require('./createObject');
 
+//This pattern create new objects based on of an existing object and all its values.
 function demoPrototypePattern() {
     console.log('inside demoPrototypePattern');
 

@@ -2,6 +2,7 @@ var clientRef = require('./Client');
 var absFactoryRef = require('./AbsFactory');
 var absObjectXRef = require('./AbsObjectX');
 
+//This pattern has a concrete Factory (inherits from abstract factory) that creates a set concrete objects (inherits from abstract object)
 function demoAbstractFactoryDriver() {
     console.log('inside demoAbstractFactoryDriver');
 

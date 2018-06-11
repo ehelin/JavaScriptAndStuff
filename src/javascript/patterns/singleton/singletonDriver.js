@@ -1,5 +1,6 @@
 var singletonReference = require('./Singleton');
 
+//This pattern only allows one instance of a class to be instantiated.
 function demoSingletonPattern(){
     console.log('inside demoSingletonPattern');
 
